@@ -11,6 +11,7 @@ import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { VerifyEmployeeComponent } from './verify-employee/verify-employee.component';
 
 
 
@@ -21,7 +22,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     AddEmployeeComponent,
     HeaderComponent,
     FooterComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    VerifyEmployeeComponent
 
   ],
   imports: [

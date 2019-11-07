@@ -40,9 +40,13 @@ onSubmit(loginForm:NgForm)
 {
 
 this.dataService.postLoginForm(this.loginInstance).subscribe(
-  result=>this.router.navigate(['/leave']),
+  result=>this.router.navigate(['/add-employee']),
   error=>this.onHttpError(error)
   
 );
+}
+
+redirect() {
+  this.router.navigate(['/forgot-password']);
 }
 }

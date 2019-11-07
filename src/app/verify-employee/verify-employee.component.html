@@ -1,0 +1,98 @@
+<div class="text-center">
+    <img class="logo" src="../../assets/verifyAccount.png" alt="logo">
+</div>
+<div class="text-center">
+    <article class="card-body">
+        <h4 class="card-title text-center mb-4 mt-1">Set-up Account</h4>
+        <p>Please fill the following to set up your account</p>
+
+        <form class="card container" #verifyAccountForm="ngForm" (ngSubmit)="onSubmit(verifyAccountForm)">
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <mat-icon>lock</mat-icon>
+                        </span>
+                    </div>
+                    <input class="form-control" type="password" placeholder="Password" name="password" required
+                        [(ngModel)]="verifyAccountInstance.password" #passwordField="ngModel"
+                        [class.field-error]="verifyAccountForm.submitted && passwordField.invalid">
+                </div>
+                <div class="input-group">
+                    <div [hidden]="(!verifyAccountForm.submitted||passwordField.valid)" class="required">
+                        * Password is required
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <mat-icon>account_box</mat-icon>
+                        </span>
+                    </div>
+                    <input class="form-control" type="password" placeholder="Confirm Password" name="confirmPassword"
+                        required [(ngModel)]="verifyAccountInstance.confirmPassword" #confirmPasswordField="ngModel"
+                        [class.field-error]="verifyAccountForm.submitted && confirmPasswordField.invalid">
+                </div>
+                <div class="input-group">
+                    <div [hidden]="(!verifyAccountForm.submitted||securityQuestionField.valid)" class="required">
+                        * Confirm Password is required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <mat-icon>contact_support</mat-icon>
+                        </span>
+                    </div>
+                    <input class="form-control" type="text" placeholder="Enter your security question" 
+                        name="securityQuestion" required
+                        [(ngModel)]="verifyAccountInstance.securityQuestion" #securityQuestionField="ngModel"
+                        [class.field-error]="verifyAccountForm.submitted && securityQuestionField.invalid">
+                </div>
+                <div class="input-group">
+                    <div [hidden]="(!verifyAccountForm.submitted||securityQuestionField.valid)" class="required">
+                        * Security Question is required
+                    </div>
+                </div>
+            </div>
+
+            <div [hidden]="!passwordMismatch"
+            class="alert alert-danger">
+            {{passwordMismatchMessage}}
+       
+          </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <mat-icon>question_answer</mat-icon>
+                        </span>
+                    </div>
+                    <input class="form-control" type="text" placeholder="Answer" 
+                        name="answer" required
+                        [(ngModel)]="verifyAccountInstance.answer" #answerField="ngModel"
+                        [class.field-error]="verifyAccountForm.submitted && answerField.invalid">
+                </div>
+                <div class="input-group">
+                    <div [hidden]="(!verifyAccountForm.submitted||answerField.valid)" class="required">
+                        * Answer is required
+                    </div>
+                </div>
+            </div>
+
+         
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-info btn-block"> Set Up My Account </button>
+            </div>
+
+
+        </form>
+    </article>
+</div>

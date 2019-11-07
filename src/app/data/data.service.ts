@@ -22,8 +22,9 @@ export class DataService {
 
   postEmployeeForm(employeeInstance:employee): Observable<any>
   {
-    employeeInstance.isManager='1';
     console.log(employeeInstance.isManager);
+    employeeInstance.isManager='1';
+    
     return this.http.post('https://localhost:44310/api/AddEmployee/newemployee',employeeInstance)
     
     //return of(loginInstance);
