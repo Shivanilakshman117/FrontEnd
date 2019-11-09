@@ -1,0 +1,195 @@
+<form class="card container" [formGroup]="leaveForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                <mat-icon>local_hospital</mat-icon>
+            </span>
+        </div>
+        <select formControlName="leaveType" class="form-control">
+
+            <option value="null" disabled="true" [selected]="true">Leave Type</option>
+            <option *ngFor="let l of leaveTypes" [ngValue]="l">{{l}}</option>
+
+        </select>
+
+    </div>
+
+
+
+    <div class="form-group input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                <mat-icon>date_range</mat-icon>
+            </span>
+        </div>
+        <input formControlName="fromDate" placeholder="From Date" class="form-control" type="text"
+         [ngClass]="{'has-error': leaveForm.get('fromDate').errors && 
+        (leaveForm.get('fromDate').touched || leaveForm.get('fromDate').dirty)}" onfocus="(this.type='date')"
+            id="fromDate">
+        <div class="input-group" *ngIf="leaveForm.get('fromDate').errors && 
+        (leaveForm.get('fromDate').touched || leaveForm.get('fromDate').dirty)">
+            <span class="required">* From date is required</span>
+        </div>
+
+
+    </div>
+
+
+
+
+    <div class="form-group input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                <mat-icon>date_range</mat-icon>
+            </span>
+        </div>
+        <input formControlName="toDate" placeholder="To Date" class="form-control textbox-n" type="text"
+            [ngClass]="{'has-error': leaveForm.get('toDate').errors && 
+            (leaveForm.get('toDate').touched || leaveForm.get('toDate').dirty)}" onfocus="(this.type='date')" id="toDate">
+        <div class="input-group" *ngIf="leaveForm.get('toDate').errors && 
+        (leaveForm.get('toDate').touched || leaveForm.get('toDate').dirty)">
+            <span class="required">* To date is required</span>
+        </div>
+
+
+    </div>
+
+
+
+    <div class="form-group input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                <mat-icon>query_builder</mat-icon>
+            </span>
+        </div>
+        <select formControlName="fromSession" class="form-control"
+            [ngClass]="{'has-error': leaveForm.get('fromSession').errors && 
+            (leaveForm.get('fromSession').touched || leaveForm.get('fromSession').dirty)}">
+            <option value="null" disabled="true" [selected]="true">From Sesion</option>
+            <option *ngFor="let s of sessions" [ngValue]="s">{{s}}</option>
+
+        </select>
+        <div class="input-group" *ngIf="leaveForm.get('fromSession').errors && 
+         (leaveForm.get('fromSession').touched || leaveForm.get('fromSession').dirty)">
+            <span class="required">
+                * From Session is required
+            </span>
+        </div>
+
+    </div>
+
+
+
+    <div class="form-group input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                <mat-icon>query_builder</mat-icon>
+            </span>
+        </div>
+        <select formControlName="toSession" class="form-control"
+            [ngClass]="{'has-error': leaveForm.get('toSession').errors && 
+            (leaveForm.get('toSession').touched || leaveForm.get('toSession').dirty)}">
+            <option value="null" disabled="true" [selected]="true">To Session</option>
+            <option *ngFor="let s of sessions" [ngValue]="s">{{s}}</option>
+
+        </select>
+        <div class="input-group" *ngIf="leaveForm.get('toSession').errors && 
+        (leaveForm.get('toSession').touched || leaveForm.get('toSession').dirty)">
+            <span class="required">
+                * To Session is required
+            </span>
+        </div>
+
+
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <mat-icon>description</mat-icon>
+                </span>
+            </div>
+
+            <input formControlName="balance" class="form-control" placeholder="0" type="number">
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <mat-icon>description</mat-icon>
+                </span>
+            </div>
+
+            <input formControlName="days" class="form-control" placeholder="0" type="number">
+
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <mat-icon>description</mat-icon>
+                </span>
+            </div>
+            <input formControlName="reason" class="form-control" placeholder="Reason" type="textarea" [ngClass]="{'has-error': leaveForm.get('reason').errors && 
+            (leaveForm.get('reason').touched || leaveForm.get('reason').dirty)}">
+        </div>
+        <div class="input-group" *ngIf="leaveForm.get('reason').errors && 
+        (leaveForm.get('reason').touched || leaveForm.get('reason').dirty)">
+            <span class="required">* Reason is required</span>
+        </div>
+
+    </div>
+
+
+
+
+    <div class="form-group input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                <mat-icon>email</mat-icon>
+            </span>
+        </div>
+        <select formControlName="sendTo" class="form-control" (focus)="getreportingAuthorities()"
+            (blur)="blurreportingAuthoritiesList()" [ngClass]="{'has-error': leaveForm.get('sendTo').errors}">
+            <option value="null" disabled="true" [selected]="true">Send To</option>
+            <option *ngFor="let r of reportingAuthoritiesList" [ngValue]="r">{{r}}</option>
+        </select>
+
+    </div>
+
+
+
+    <div class="form-group input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                <mat-icon>email</mat-icon>
+            </span>
+        </div>
+        <select formControlName="CCTo" class="form-control" (focus)="getccToList()" (blur)="blurccToList()">
+            <option value="null" disabled="true" [selected]="true">CC To</option>
+            <option *ngFor="let c of ccToList" [ngValue]="c">{{c}}</option>
+
+        </select>
+    </div>
+
+
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-info btn-block"> Apply </button>
+    </div>
+    <div class="form-group">
+        <button type="reset" class="btn btn-danger btn-block"> Cancel </button>
+    </div>
+
+</form>

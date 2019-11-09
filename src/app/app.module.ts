@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
@@ -12,6 +12,8 @@ import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { VerifyEmployeeComponent } from './verify-employee/verify-employee.component';
+import { LeaveComponent } from './leave/leave.component';
+import * as moment from 'moment';
 
 
 
@@ -23,7 +25,8 @@ import { VerifyEmployeeComponent } from './verify-employee/verify-employee.compo
     HeaderComponent,
     FooterComponent,
     ForgotPasswordComponent,
-    VerifyEmployeeComponent
+    VerifyEmployeeComponent,
+    LeaveComponent
 
   ],
   imports: [
@@ -32,7 +35,8 @@ import { VerifyEmployeeComponent } from './verify-employee/verify-employee.compo
     FormsModule,
     BrowserAnimationsModule,
     CustomMaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
 
   ],
   providers: [],

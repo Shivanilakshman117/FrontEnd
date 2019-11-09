@@ -29,4 +29,14 @@ export class DataService {
     
     //return of(loginInstance);
   }
+
+  postForEmployeeList():Observable<any>
+  {
+    return this.http.post('https://localhost:44310/api/Values/GetAllEmployees',null);
+  }
+
+  postForReportingAuthoritiesList():Observable<any>
+  {
+    return this.http.post('https://localhost:44310/api/Values/GetReportingAuthorities',null);
+  }
 }
