@@ -23,14 +23,22 @@ export class AddEmployeeComponent implements OnInit {
     reportingManager:null,
     address:null,
     bloodType:null,
-    isManager:null,
+    isManager:"0",
     isAdmin:false
   };
+manager:string;
+managersList: any = [];
+isHidden=true;
 genders = ['Male', 'Female', 'Other'];
 departments = ['BD', 'BT', 'QA','IT','EDM','HR'];
 designations=['CEO','COO','Head','Manager','Senior Developer','Junior Developer'];
 bloodTypes=['A+','A-','B+','B-','O+','O-','AB+','AB-'];
-
+tempManagersList:any=[];
+postError=false;
+postErrorMessage=" ";
+postMessage='';
+messageStatus=false;
+today = new Date();
 constructor(private dataService:DataService,private lay:LayoutService) {
    
    }
@@ -39,15 +47,65 @@ constructor(private dataService:DataService,private lay:LayoutService) {
     this.lay.showFoot();
     this.lay.showNav();
   }
+
+onHttpError(errorResponse:any)
+{
+console.log('error: ',errorResponse);
+this.postError=true;
+this.postErrorMessage=errorResponse.error.error;
+
+
+}
+
+PostMessage(message:string)
+{
+  this.messageStatus=true;
+  this.postMessage=message;
+}
   onSubmit(employeeForm:NgForm)
   {
-      
-  this.dataService.postEmployeeForm(this.employeeInstance).subscribe(
-      result=>(console.log(result)),
-      error=>console.log(error)
+    if(employeeForm.valid)  
+    {
+      this.dataService.postEmployeeForm(this.employeeInstance).subscribe(
+      result=>(this.PostMessage(result)),
+      error=>this.onHttpError(error)
     );
-  
-   console.log(this.employeeInstance.bloodType,this.employeeInstance.department,this.employeeInstance.designation,this.employeeInstance.gender);
+    console.log("valid");
+      }
+      else
+      {console.log("invalid");
+    }
+ }
 
+
+  addManager(e)
+  {if(e.checked){        
+
+    this.isHidden=false;
+    this.employeeInstance.isManager="0";
+
+  }
+ else 
+ {
+  this.isHidden=true;
+ }
+  }
+
+  getManagersList() {
+
+    this.dataService.postForManagersList().subscribe(
+      (result: any) => {
+        (result.forEach(element => {
+          this.tempManagersList.push(element);
+        }),
+          error => console.log(error)
+        )
+      }
+    );
+    this.managersList = this.tempManagersList;
+      console.log(this.managersList);
+  }
+  blurManagersList() {
+    this.tempManagersList = [];
   }
 }

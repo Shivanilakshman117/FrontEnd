@@ -7,5 +7,7 @@ export interface leave
     reason:string,
     sendTo:string,
     CCTo:string,
-    status:string
+    status:string,
+    days:number,
+    balance:number
 }

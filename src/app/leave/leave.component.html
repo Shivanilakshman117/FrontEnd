@@ -1,195 +1,190 @@
-<form class="card container" [formGroup]="leaveForm" (ngSubmit)="onSubmit()">
+<form class="card container" #leaveForm="ngForm" (ngSubmit)="onSubmit(leaveForm)">
 
-    <div class="form-group input-group">
-        <div class="input-group-prepend">
-            <span class="input-group-text">
-                <mat-icon>local_hospital</mat-icon>
-            </span>
-        </div>
-        <select formControlName="leaveType" class="form-control">
+    <div class="row">
+        <div class="form-group col">
+            <!--field start-->
+            <label for="Leave Type">Leave Type</label>
+            <div class="form-group input-group" required>
 
-            <option value="null" disabled="true" [selected]="true">Leave Type</option>
-            <option *ngFor="let l of leaveTypes" [ngValue]="l">{{l}}</option>
-
-        </select>
-
-    </div>
-
-
-
-    <div class="form-group input-group">
-        <div class="input-group-prepend">
-            <span class="input-group-text">
-                <mat-icon>date_range</mat-icon>
-            </span>
-        </div>
-        <input formControlName="fromDate" placeholder="From Date" class="form-control" type="text"
-         [ngClass]="{'has-error': leaveForm.get('fromDate').errors && 
-        (leaveForm.get('fromDate').touched || leaveForm.get('fromDate').dirty)}" onfocus="(this.type='date')"
-            id="fromDate">
-        <div class="input-group" *ngIf="leaveForm.get('fromDate').errors && 
-        (leaveForm.get('fromDate').touched || leaveForm.get('fromDate').dirty)">
-            <span class="required">* From date is required</span>
-        </div>
-
-
-    </div>
-
-
-
-
-    <div class="form-group input-group">
-        <div class="input-group-prepend">
-            <span class="input-group-text">
-                <mat-icon>date_range</mat-icon>
-            </span>
-        </div>
-        <input formControlName="toDate" placeholder="To Date" class="form-control textbox-n" type="text"
-            [ngClass]="{'has-error': leaveForm.get('toDate').errors && 
-            (leaveForm.get('toDate').touched || leaveForm.get('toDate').dirty)}" onfocus="(this.type='date')" id="toDate">
-        <div class="input-group" *ngIf="leaveForm.get('toDate').errors && 
-        (leaveForm.get('toDate').touched || leaveForm.get('toDate').dirty)">
-            <span class="required">* To date is required</span>
-        </div>
-
-
-    </div>
-
-
-
-    <div class="form-group input-group">
-        <div class="input-group-prepend">
-            <span class="input-group-text">
-                <mat-icon>query_builder</mat-icon>
-            </span>
-        </div>
-        <select formControlName="fromSession" class="form-control"
-            [ngClass]="{'has-error': leaveForm.get('fromSession').errors && 
-            (leaveForm.get('fromSession').touched || leaveForm.get('fromSession').dirty)}">
-            <option value="null" disabled="true" [selected]="true">From Sesion</option>
-            <option *ngFor="let s of sessions" [ngValue]="s">{{s}}</option>
-
-        </select>
-        <div class="input-group" *ngIf="leaveForm.get('fromSession').errors && 
-         (leaveForm.get('fromSession').touched || leaveForm.get('fromSession').dirty)">
-            <span class="required">
-                * From Session is required
-            </span>
-        </div>
-
-    </div>
-
-
-
-    <div class="form-group input-group">
-        <div class="input-group-prepend">
-            <span class="input-group-text">
-                <mat-icon>query_builder</mat-icon>
-            </span>
-        </div>
-        <select formControlName="toSession" class="form-control"
-            [ngClass]="{'has-error': leaveForm.get('toSession').errors && 
-            (leaveForm.get('toSession').touched || leaveForm.get('toSession').dirty)}">
-            <option value="null" disabled="true" [selected]="true">To Session</option>
-            <option *ngFor="let s of sessions" [ngValue]="s">{{s}}</option>
-
-        </select>
-        <div class="input-group" *ngIf="leaveForm.get('toSession').errors && 
-        (leaveForm.get('toSession').touched || leaveForm.get('toSession').dirty)">
-            <span class="required">
-                * To Session is required
-            </span>
-        </div>
-
-
-    </div>
-
-
-
-    <div class="form-group">
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text">
-                    <mat-icon>description</mat-icon>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                    <mat-icon>next_week</mat-icon>
                 </span>
+                </div>
+                <select name="leaveType" class="form-control" required [(ngModel)]="leaveInstance.leaveType" #leaveTypeField="ngModel" [class.field-error]="leaveForm.submitted && leaveTypeField.invalid" required>
+                <option *ngFor="let l of leaveTypes" [ngValue]="l">{{l}}</option>
+            </select>
+
+
+            </div>
+        </div>
+    </div>
+    <!--field end-->
+
+    <!--field start-->
+
+    <div class="row">
+        <div class="form-group col">
+
+            <label for="Leave Type">
+                From Date
+            </label>
+
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <mat-icon>date_range</mat-icon>
+                    </span>
+                </div>
+                <input name="fromdate" class="form-control" type="date" required [(ngModel)]="leaveInstance.fromDate" #fromDateField="ngModel" [class.field-error]="leaveForm.submitted && fromDateField.invalid" required>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label for="Leave Type">To Date</label>
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <mat-icon>date_range</mat-icon>
+                    </span>
+                </div>
+                <input class="form-control" type="date" name="toDate" [(ngModel)]="leaveInstance.toDate" #toDateField="ngModel" [class.field-error]="leaveForm.submitted && toDateField.invalid" required>
             </div>
 
-            <input formControlName="balance" class="form-control" placeholder="0" type="number">
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="form-group col">
+
+            <label for="Leave Type">From Session</label>
+            <div class="form-group input-group">
+
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <mat-icon>query_builder</mat-icon>
+                    </span>
+                </div>
+
+                <select class="form-control" [(ngModel)]="leaveInstance.fromSession" name="fromSession" #fromSessionField="ngModel" [class.field-error]="leaveForm.submitted && fromSessionField.invalid" required>
+                    <option *ngFor="let s of sessions" [ngValue]="s">{{s}}</option>
+                </select>
+
+
+
+            </div>
+        </div>
+
+        <div class="form-group col">
+            <label for="Leave Type">To Session</label>
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                            <mat-icon>query_builder</mat-icon>
+                        </span>
+                </div>
+                <select class="form-control" [(ngModel)]="leaveInstance.toSession" name="toSession" #toSessionField="ngModel" [class.field-error]="leaveForm.submitted && toSessionField.invalid" required>
+                        <option *ngFor="let s of sessions" [ngValue]="s">{{s}}</option>
+                    </select>
+                <div class="input-group" [hidden]>
+
+                </div>
+
+
+            </div>
         </div>
     </div>
 
+    <div class="row">
 
-    <div class="form-group">
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text">
+        <div class="form-group col">
+            <label for="Leave Type">Balance</label>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                    <mat-icon>arrow_drop_down</mat-icon>
+                </span>
+                    </div>
+
+                    <input class="form-control" type="number" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label for="Leave Type">Days</label>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                    <mat-icon>arrow_drop_up</mat-icon>
+                </span>
+                    </div>
+
+                    <input class="form-control" type="number" disabled>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col">
+            <label for="Leave Type">Reason</label>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
                     <mat-icon>description</mat-icon>
                 </span>
+                    </div>
+                    <input class="form-control" type="textarea" name="reason" [(ngModel)]="leaveInstance.reason" #reasonField="ngModel" [class.field-error]="leaveForm.submitted && reasonField.invalid" required>
+                </div>
+                <div class="input-group" [hidden]>
+
+                </div>
             </div>
-
-            <input formControlName="days" class="form-control" placeholder="0" type="number">
-
         </div>
     </div>
+    <div class="row">
+        <div class="form-group col">
 
-
-
-    <div class="form-group">
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text">
-                    <mat-icon>description</mat-icon>
-                </span>
-            </div>
-            <input formControlName="reason" class="form-control" placeholder="Reason" type="textarea" [ngClass]="{'has-error': leaveForm.get('reason').errors && 
-            (leaveForm.get('reason').touched || leaveForm.get('reason').dirty)}">
-        </div>
-        <div class="input-group" *ngIf="leaveForm.get('reason').errors && 
-        (leaveForm.get('reason').touched || leaveForm.get('reason').dirty)">
-            <span class="required">* Reason is required</span>
-        </div>
-
-    </div>
-
-
-
-
-    <div class="form-group input-group">
-        <div class="input-group-prepend">
-            <span class="input-group-text">
+            <label for="Leave Type">Send to</label>
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
                 <mat-icon>email</mat-icon>
             </span>
+                </div>
+                <select class="form-control" [(ngModel)]="leaveInstance.sendTo" #sendToField="ngModel" [class.field-error]="leaveForm.submitted && sendToField.invalid" required>
+  
+                     <option *ngFor="let r of reportingAuthoritiesList" [ngValue]="r">{{r}}</option>
+                 </select>
+                <div class="input-group" [hidden]>
+
+                </div>
+            </div>
         </div>
-        <select formControlName="sendTo" class="form-control" (focus)="getreportingAuthorities()"
-            (blur)="blurreportingAuthoritiesList()" [ngClass]="{'has-error': leaveForm.get('sendTo').errors}">
-            <option value="null" disabled="true" [selected]="true">Send To</option>
-            <option *ngFor="let r of reportingAuthoritiesList" [ngValue]="r">{{r}}</option>
-        </select>
-
-    </div>
-
-
-
-    <div class="form-group input-group">
-        <div class="input-group-prepend">
-            <span class="input-group-text">
-                <mat-icon>email</mat-icon>
-            </span>
+        <div class="form-group col">
+            <label for="Leave Type">CC To</label>
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                    <mat-icon>email</mat-icon>
+                </span>
+                </div>
+                <select class="form-control">
+    
+                <option *ngFor="let c of ccToList" [ngValue]="c">{{c}}</option>
+    
+            </select>
+            </div>
         </div>
-        <select formControlName="CCTo" class="form-control" (focus)="getccToList()" (blur)="blurccToList()">
-            <option value="null" disabled="true" [selected]="true">CC To</option>
-            <option *ngFor="let c of ccToList" [ngValue]="c">{{c}}</option>
-
-        </select>
     </div>
-
-
-
-    <div class="form-group">
-        <button type="submit" class="btn btn-info btn-block"> Apply </button>
+    <div class="row pad">
+        <div class="form-group col">
+            <div class="form-group">
+                <button type="submit" class="btn btn-info btn-block"> Apply </button>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <button type="reset" class="btn btn-danger btn-block"> Cancel </button>
-    </div>
-
 </form>

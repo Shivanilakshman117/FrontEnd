@@ -14,6 +14,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { VerifyEmployeeComponent } from './verify-employee/verify-employee.component';
 import { LeaveComponent } from './leave/leave.component';
 import * as moment from 'moment';
+import { SetLeaveComponent } from './set-leave/set-leave.component';
 
 
 
@@ -26,7 +27,8 @@ import * as moment from 'moment';
     FooterComponent,
     ForgotPasswordComponent,
     VerifyEmployeeComponent,
-    LeaveComponent
+    LeaveComponent,
+    SetLeaveComponent
 
   ],
   imports: [

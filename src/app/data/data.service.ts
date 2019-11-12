@@ -3,6 +3,7 @@ import { login } from './login';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { employee } from './employee';
+import { Holidays } from './holidays';
 
 
 @Injectable({
@@ -22,8 +23,6 @@ export class DataService {
 
   postEmployeeForm(employeeInstance:employee): Observable<any>
   {
-    console.log(employeeInstance.isManager);
-    employeeInstance.isManager='1';
     
     return this.http.post('https://localhost:44310/api/AddEmployee/newemployee',employeeInstance)
     
@@ -38,5 +37,14 @@ export class DataService {
   postForReportingAuthoritiesList():Observable<any>
   {
     return this.http.post('https://localhost:44310/api/Values/GetReportingAuthorities',null);
+  }
+
+  getHolidaysList():Observable<any>
+  {
+    return this.http.post('https://localhost:44310/api/Values/GetHolidaysList',null);
+  }
+  postForManagersList():Observable<any>
+  {
+    return this.http.post('https://localhost:44310/api/Values/GetManagersList',null)
   }
 }

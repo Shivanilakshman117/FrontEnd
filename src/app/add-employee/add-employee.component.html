@@ -8,9 +8,7 @@
                     <mat-icon>account_box</mat-icon>
                 </span>
             </div>
-            <input name="name" class="form-control" placeholder="Full name" type="text" required
-                [(ngModel)]="employeeInstance.name" #nameField="ngModel"
-                [class.field-error]="employeeForm.submitted && nameField.invalid">
+            <input name="name" class="form-control" placeholder="Full name" type="text" required [(ngModel)]="employeeInstance.name" #nameField="ngModel" [class.field-error]="employeeForm.submitted && nameField.invalid">
         </div>
 
 
@@ -49,9 +47,7 @@
                     <mat-icon>email</mat-icon>
                 </span>
             </div>
-            <input name="email" class="form-control" placeholder="Email address" type="email" required
-                [(ngModel)]="employeeInstance.email" #emailField="ngModel"
-                [class.field-error]="employeeForm.submitted && emailField.invalid">
+            <input name="email" class="form-control" placeholder="Email address" type="email" required [(ngModel)]="employeeInstance.email" #emailField="ngModel" [class.field-error]="employeeForm.submitted && emailField.invalid">
             <div class="input-group">
                 <div [hidden]="!employeeForm.submitted||emailField.valid" class="required">
                     * Email is required
@@ -65,9 +61,7 @@
                 <mat-icon>phone</mat-icon>
             </span>
         </div>
-        <input name="mobile" class="form-control" placeholder="Mobile number" type="text" required
-            [(ngModel)]="employeeInstance.mobile" #mobileField="ngModel"
-            [class.field-error]="employeeForm.submitted && mobileField.invalid">
+        <input name="mobile" class="form-control" placeholder="Mobile number" type="text" required [(ngModel)]="employeeInstance.mobile" #mobileField="ngModel" [class.field-error]="employeeForm.submitted && mobileField.invalid" min="1" max="5">
 
         <div class="input-group">
             <div [hidden]="!employeeForm.submitted||mobileField.valid" class="required">
@@ -85,9 +79,8 @@
                 </span>
             </div>
 
-            <input name="dob" placeholder="Date of Birth" class="form-control textbox-n" type="text"
-                onfocus="(this.type='date')" id="dob" required [(ngModel)]="employeeInstance.dob" #dobField="ngModel"
-                [class.field-error]="employeeForm.submitted && dobField.invalid">
+            <input name="dob" placeholder="Date of Birth" class="form-control textbox-n" type="text" onfocus="(this.type='date')" id="dob" required [(ngModel)]="employeeInstance.dob" #dobField="ngModel" [class.field-error]="employeeForm.submitted && dobField.invalid"
+                max={{today}}>
         </div>
         <div class="input-group">
             <div [hidden]="!employeeForm.submitted||dobField.valid" class="required">
@@ -101,9 +94,7 @@
                 <mat-icon>date_range</mat-icon>
             </span>
         </div>
-        <input name="doj" placeholder="Date of Joining" class="form-control textbox-n" type="text"
-            onfocus="(this.type='date')" id="doj" required [(ngModel)]="employeeInstance.doj" #dojField="ngModel"
-            [class.field-error]="employeeForm.submitted && dojField.invalid">
+        <input name="doj" placeholder="Date of Joining" class="form-control textbox-n" type="text" onfocus="(this.type='date')" id="doj" required [(ngModel)]="employeeInstance.doj" #dojField="ngModel" [class.field-error]="employeeForm.submitted && dojField.invalid">
         <div class="input-group">
             <div [hidden]="!employeeForm.submitted||dojField.valid" class="required">
                 * DOJ is required
@@ -119,8 +110,7 @@
                 <mat-icon>work</mat-icon>
             </span>
         </div>
-        <select name="department" class="form-control" #departmentField="ngModel"
-            [(ngModel)]="employeeInstance.department">
+        <select name="department" class="form-control" #departmentField="ngModel" [(ngModel)]="employeeInstance.department">
             <option value="null" disabled="true" [selected]="true">Department</option>
             <option *ngFor="let d of departments" [ngValue]="d">{{d}}</option>
 
@@ -134,8 +124,7 @@
         </div>
 
 
-        <select name="desgination" class="form-control" #designationField="ngModel"
-            [(ngModel)]="employeeInstance.designation">
+        <select name="desgination" class="form-control" #designationField="ngModel" [(ngModel)]="employeeInstance.designation">
             <option value="null" disabled="true" [selected]="true">Designation</option>
             <option *ngFor="let de of designations" [ngValue]="de">{{de}}</option>
 
@@ -147,28 +136,7 @@
         </div>
 
     </div>
-   <!-- <div class="form-group input-group">
-        <div class="input-group-prepend">
-            <span class="input-group-text">
-                <mat-icon>assignment_ind</mat-icon>
-            </span>
-        </div>
-        <select class="form-control">
 
-            <option selected>hr@psiog.com</option>
-            <option>COO</option>
-            <option>Head</option>
-            <option>Manager</option>
-            <option>Senior Developer</option>
-            <option>Junior Developer</option>
-        </select>
-        <div class="input-group">
-            <div [hidden]="!employeeForm.submitted||Field.valid" class="required">
-                * Name is required
-            </div>
-        </div>
-    </div>
-    -->
     <div class="form-group">
         <div class="input-group">
             <div class="input-group-prepend">
@@ -176,9 +144,7 @@
                     <mat-icon>home</mat-icon>
                 </span>
             </div>
-            <input name="address" class="form-control" placeholder="Address" type="textarea" required
-                [(ngModel)]="employeeInstance.address" #addressField="ngModel"
-                [class.field-error]="employeeForm.submitted && addressField.invalid">
+            <input name="address" class="form-control" placeholder="Address" type="textarea" required [(ngModel)]="employeeInstance.address" #addressField="ngModel" [class.field-error]="employeeForm.submitted && addressField.invalid">
         </div>
 
         <div class="input-group">
@@ -193,8 +159,7 @@
                 <mat-icon>local_hospital</mat-icon>
             </span>
         </div>
-        <select  name="bloodType" class="form-control" #bloodTypeField="ngModel"
-            [(ngModel)]="employeeInstance.bloodType" >
+        <select name="bloodType" class="form-control" #bloodTypeField="ngModel" [(ngModel)]="employeeInstance.bloodType">
             <option value="null" disabled="true" [selected]="true">Blood Group</option>
             <option *ngFor="let b of bloodTypes" [ngValue]="b">{{b}}</option>
 
@@ -203,26 +168,45 @@
             <div [hidden]="!employeeForm.submitted||bloodTypeField.valid" class="required">
                 * Blood Type is required
             </div>
-        </div> 
+        </div>
 
     </div>
     <div class="form-group input-group">
 
         <div class="form-control">
-            <mat-checkbox>Make them Manager</mat-checkbox>
+            <mat-checkbox (change)="addManager($event)">Assign a Manager</mat-checkbox>
         </div>
+    </div>
+    <div class="form-group input-group" [(hidden)]="isHidden">
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                    <mat-icon>assignment_ind</mat-icon>
+                </span>
+        </div>
+
+
+        <select name="manager" class="form-control" #managerField="ngModel" [(ngModel)]="manager" (focus)="getManagersList()" (blur)="blurManagersList()">
+                <option *ngFor="let m of managersList" [ngValue]="m">{{m}}</option>
+    
+        </select>
+
     </div>
     <div class="form-group input-group">
         <div class="form-control">
             <mat-checkbox>Make them Admin</mat-checkbox>
         </div>
     </div>
+    <div [hidden]="!postError" class="alert alert-danger">
+        {{postErrorMessage}}
+
+    </div>
+    <div [hidden]="!messageStatus" class="alert alert-danger">
+        {{postMessage}}
+
+    </div>
     <div class="form-group">
         <button type="submit" class="btn btn-info btn-block"> Add Associate </button>
     </div>
-    <div class="form-group">
-        <button type="reset" class="btn btn-danger btn-block"> Cancel </button>
-    </div> <!-- form-group// -->
+
 
 </form>
-

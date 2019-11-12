@@ -5,6 +5,7 @@ import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { VerifyEmployeeComponent } from './verify-employee/verify-employee.component';
 import { LeaveComponent } from './leave/leave.component';
+import { SetLeaveComponent } from './set-leave/set-leave.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,10 @@ const routes: Routes = [
     path: 'verify-employee',
     component: VerifyEmployeeComponent,
 
+  },
+  {
+    path:'set-leave',
+    component:SetLeaveComponent,
   }
   // otherwise redirect to login
   //{ path: '**', redirectTo: '' }

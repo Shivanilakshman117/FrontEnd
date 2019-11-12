@@ -16,7 +16,7 @@ const moment = require('moment');
 })
 export class LeaveComponent implements OnInit {
  
-  
+  dabba: '';
   leaveTypes = ['Sick Leave', 'Casual Leave', 'Privilege Leave'];
   sessions = [1, 2];
   ccToList: any = [];
@@ -26,22 +26,20 @@ export class LeaveComponent implements OnInit {
   balance: number = 0;
   days: number = 0;
  // moment = require('moment-business-days');
-  fromDateError = "";
-  /*leaveApplication: leave =
-    {
-      leaveType: null,
-      fromDate: null,
-      toDate: null,
-      fromSession: null,
-      toSession: null,
-      CCTo: null,
-      sendTo: null,
-      reason: null,
-      status: "Applied"
-    }
-*/
-    leaveForm:FormGroup;
-
+ leaveInstance:leave={
+      leaveType:'Sick Leave',
+      fromDate:null,
+      toDate:null,
+      fromSession:null,
+      toSession:null,
+      reason:null,
+      sendTo:null,
+      CCTo:null,
+      days:0,
+      balance:0,
+      status:'Applied'
+ }
+  
   constructor(private dataService: DataService, private router: Router,
     private lay: LayoutService,
     private fb:FormBuilder) { }
@@ -50,22 +48,18 @@ export class LeaveComponent implements OnInit {
   ngOnInit() {
     this.lay.showFoot();
     this.lay.showNav();
-    this.leaveForm= this.fb.group(
-      {
-        leaveType:['Sick Leave'],
-        fromDate:['',[Validators.required,this.validateFromDate]],
-        toDate:['',Validators.required],
-        fromSession:['',Validators.required],
-        toSession:['',Validators.required],
-        reason:['',Validators.required],
-        sendTo:['',Validators.required],
-        CCTo:[''],
-        days:[0],
-        balance:[0],
-    });
+    
+    this.getccToList();
+    this.getreportingAuthorities();
+    
   }
- 
+onSubmit()
+{
+  console.log(this.leaveInstance);
+}
   getccToList() {
+  
+
 
     this.dataService.postForEmployeeList().subscribe(
       (result: any) => {
@@ -80,11 +74,6 @@ export class LeaveComponent implements OnInit {
 
   }
 
-
-  blurccToList() {
-    this.tempCCToList = [];
-  }
-
   getreportingAuthorities() {
     this.dataService.postForReportingAuthoritiesList().subscribe(
       (result: any) => {
@@ -95,38 +84,38 @@ export class LeaveComponent implements OnInit {
         )
       }
     );
+
     this.reportingAuthoritiesList = this.tempreportingAuthoritiesList;
-    console.log(this.reportingAuthoritiesList);
+
   }
 
+validateForSickLeave(from:Date,type:string){
 
-
-  blurreportingAuthoritiesList() {
-    this.tempreportingAuthoritiesList = [];
-  }
-
-onSubmit()
-{
-  console.log(this.leaveForm.value);
+  var fulldate = moment(new Date(), 'YYYY-MM-DD');
+  //var fromDate=from.value;
   
-}
+  var today = moment.parseZone(fulldate).format('YYYY-MM-DD');
 
-validateFromDate(control:AbstractControl):{[key:string]:any}| null{
+  if ( moment(from).isAfter(today))
   
-  /*var fromDate= control.value;
-  var fulldate = this.moment(new Date(), 'YYYY-MM-DD');
-  var today = this.moment.parseZone(fulldate).format('YYYY-MM-DD');
-  if (this.moment(fromDate).isAfter(today))
-  
-  {
-    return {'Cannot apply sick leave in advance!':true}
+  { 
+    console.log("Cannot apply sick leave in advance!");
+    //return {'advanceError':"Cannot apply sick leave in advance!"};
+    return false;
   }
 
   else
   {
-    return null;
-  }*/
-  console.log(moment());
-return null;
+    return true;
+  }
+
+
 }
+
+
+
+
+
+
+
 }
