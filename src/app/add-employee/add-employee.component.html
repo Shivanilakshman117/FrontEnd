@@ -115,6 +115,11 @@
             <option *ngFor="let d of departments" [ngValue]="d">{{d}}</option>
 
         </select>
+        <div class="input-group">
+            <div [hidden]="!employeeForm.submitted||departmentField.valid" class="required">
+                * Department is required
+            </div>
+        </div>
     </div>
     <div class="form-group input-group">
         <div class="input-group-prepend">
@@ -171,42 +176,43 @@
         </div>
 
     </div>
+
     <div class="form-group input-group">
 
         <div class="form-control">
-            <mat-checkbox (change)="addManager($event)">Assign a Manager</mat-checkbox>
+            <mat-checkbox (change)=" onCheckManager($event)">Add their manager</mat-checkbox>
+
         </div>
     </div>
-    <div class="form-group input-group" [(hidden)]="isHidden">
-        <div class="input-group-prepend">
-            <span class="input-group-text">
+    <div class="form-group input-group " [(hidden)]="isHidden ">
+        <div class="input-group-prepend ">
+            <span class="input-group-text ">
                     <mat-icon>assignment_ind</mat-icon>
                 </span>
+
         </div>
 
-
-        <select name="manager" class="form-control" #managerField="ngModel" [(ngModel)]="manager" (focus)="getManagersList()" (blur)="blurManagersList()">
-                <option *ngFor="let m of managersList" [ngValue]="m">{{m}}</option>
-    
+        <select name="managerName" class="form-control " [(ngModel)]="employeeInstance.managerName ">
+        <option *ngFor="let m of managersList " [ngValue]="m ">{{m}}</option>
         </select>
 
     </div>
-    <div class="form-group input-group">
-        <div class="form-control">
-            <mat-checkbox>Make them Admin</mat-checkbox>
+    <div class="form-group input-group ">
+        <div class="form-control ">
+            <mat-checkbox (change)="onCheckAdmin($event)">Make them Admin</mat-checkbox>
         </div>
     </div>
-    <div [hidden]="!postError" class="alert alert-danger">
+    <div [hidden]="!postError " class="alert alert-danger ">
         {{postErrorMessage}}
 
     </div>
-    <div [hidden]="!messageStatus" class="alert alert-danger">
+    <div [hidden]="!messageStatus " class="alert alert-danger ">
         {{postMessage}}
 
     </div>
+
     <div class="form-group">
         <button type="submit" class="btn btn-info btn-block"> Add Associate </button>
     </div>
-
 
 </form>

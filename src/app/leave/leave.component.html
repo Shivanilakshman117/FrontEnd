@@ -1,42 +1,46 @@
 <form class="card container" #leaveForm="ngForm" (ngSubmit)="onSubmit(leaveForm)">
-
     <div class="row">
         <div class="form-group col">
             <!--field start-->
             <label for="Leave Type">Leave Type</label>
             <div class="form-group input-group" required>
-
                 <div class="input-group-prepend">
                     <span class="input-group-text">
-                    <mat-icon>next_week</mat-icon>
+                   <mat-icon>next_week</mat-icon>
                 </span>
                 </div>
                 <select name="leaveType" class="form-control" required [(ngModel)]="leaveInstance.leaveType" #leaveTypeField="ngModel" [class.field-error]="leaveForm.submitted && leaveTypeField.invalid" required>
-                <option *ngFor="let l of leaveTypes" [ngValue]="l">{{l}}</option>
-            </select>
+             <option *ngFor="let l of leaveTypes" [ngValue]="l">{{l}}</option>
+             </select>
+                <div class="input-group">
+                    <div [hidden]="!leaveForm.submitted||leaveTypeField.valid" class="required">
+                        * Required
+                    </div>
+                </div>
+                <div [hidden]="!sickLeaveError" class="required">
+                    {{sickLeaveMessage}}
 
-
+                </div>
             </div>
         </div>
     </div>
-    <!--field end-->
-
-    <!--field start-->
-
     <div class="row">
         <div class="form-group col">
-
             <label for="Leave Type">
-                From Date
-            </label>
-
+          From Date
+          </label>
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
-                        <mat-icon>date_range</mat-icon>
-                    </span>
+                   <mat-icon>date_range</mat-icon>
+                </span>
                 </div>
                 <input name="fromdate" class="form-control" type="date" required [(ngModel)]="leaveInstance.fromDate" #fromDateField="ngModel" [class.field-error]="leaveForm.submitted && fromDateField.invalid" required>
+            </div>
+            <div class="input-group">
+                <div [hidden]="!leaveForm.submitted||fromDateField.valid" class="required">
+                    * Required
+                </div>
             </div>
         </div>
         <div class="form-group col">
@@ -44,70 +48,68 @@
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
-                        <mat-icon>date_range</mat-icon>
-                    </span>
+                   <mat-icon>date_range</mat-icon>
+                </span>
                 </div>
                 <input class="form-control" type="date" name="toDate" [(ngModel)]="leaveInstance.toDate" #toDateField="ngModel" [class.field-error]="leaveForm.submitted && toDateField.invalid" required>
             </div>
-
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="form-group col">
-
-            <label for="Leave Type">From Session</label>
-            <div class="form-group input-group">
-
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <mat-icon>query_builder</mat-icon>
-                    </span>
+            <div class="input-group">
+                <div [hidden]="!leaveForm.submitted||toDateField.valid" class="required">
+                    * Required
                 </div>
-
-                <select class="form-control" [(ngModel)]="leaveInstance.fromSession" name="fromSession" #fromSessionField="ngModel" [class.field-error]="leaveForm.submitted && fromSessionField.invalid" required>
-                    <option *ngFor="let s of sessions" [ngValue]="s">{{s}}</option>
-                </select>
-
-
-
             </div>
         </div>
-
+    </div>
+    <div class="row">
+        <div class="form-group col">
+            <label for="Leave Type">From Session</label>
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                   <mat-icon>query_builder</mat-icon>
+                </span>
+                </div>
+                <select class="form-control" [(ngModel)]="leaveInstance.fromSession" name="fromSession" #fromSessionField="ngModel" [class.field-error]="leaveForm.submitted && fromSessionField.invalid" required>
+             <option *ngFor="let s of sessions" [ngValue]="s">{{s}}</option>
+             </select>
+            </div>
+            <div class="input-group">
+                <div [hidden]="!leaveForm.submitted||fromSessionField.valid" class="required">
+                    * Required
+                </div>
+            </div>
+        </div>
         <div class="form-group col">
             <label for="Leave Type">To Session</label>
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
-                            <mat-icon>query_builder</mat-icon>
-                        </span>
+                   <mat-icon>query_builder</mat-icon>
+                </span>
                 </div>
                 <select class="form-control" [(ngModel)]="leaveInstance.toSession" name="toSession" #toSessionField="ngModel" [class.field-error]="leaveForm.submitted && toSessionField.invalid" required>
-                        <option *ngFor="let s of sessions" [ngValue]="s">{{s}}</option>
-                    </select>
+             <option *ngFor="let s of sessions" [ngValue]="s">{{s}}</option>
+             </select>
                 <div class="input-group" [hidden]>
-
                 </div>
-
-
+            </div>
+            <div class="input-group">
+                <div [hidden]="!leaveForm.submitted||toSessionField.valid" class="required">
+                    * Required
+                </div>
             </div>
         </div>
     </div>
-
     <div class="row">
-
         <div class="form-group col">
             <label for="Leave Type">Balance</label>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
-                    <mat-icon>arrow_drop_down</mat-icon>
-                </span>
+                      <mat-icon>arrow_drop_down</mat-icon>
+                   </span>
                     </div>
-
                     <input class="form-control" type="number" disabled>
                 </div>
             </div>
@@ -118,10 +120,9 @@
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
-                    <mat-icon>arrow_drop_up</mat-icon>
-                </span>
+                      <mat-icon>arrow_drop_up</mat-icon>
+                   </span>
                     </div>
-
                     <input class="form-control" type="number" disabled>
                 </div>
             </div>
@@ -134,33 +135,33 @@
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
-                    <mat-icon>description</mat-icon>
-                </span>
+                      <mat-icon>description</mat-icon>
+                   </span>
                     </div>
                     <input class="form-control" type="textarea" name="reason" [(ngModel)]="leaveInstance.reason" #reasonField="ngModel" [class.field-error]="leaveForm.submitted && reasonField.invalid" required>
                 </div>
-                <div class="input-group" [hidden]>
-
+                <div [hidden]="!leaveForm.submitted||reasonField.valid" class="required">
+                    * Required
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="form-group col">
-
             <label for="Leave Type">Send to</label>
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
-                <mat-icon>email</mat-icon>
-            </span>
+                   <mat-icon>email</mat-icon>
+                </span>
                 </div>
-                <select class="form-control" [(ngModel)]="leaveInstance.sendTo" #sendToField="ngModel" [class.field-error]="leaveForm.submitted && sendToField.invalid" required>
-  
-                     <option *ngFor="let r of reportingAuthoritiesList" [ngValue]="r">{{r}}</option>
-                 </select>
-                <div class="input-group" [hidden]>
-
+                <select class="form-control" name="sendTo" [(ngModel)]="leaveInstance.sendTo" #sendToField="ngModel" [class.field-error]="leaveForm.submitted && sendToField.invalid" required>
+             <option *ngFor="let r of reportingAuthoritiesList" [ngValue]="r">{{r}}</option>
+             </select>
+            </div>
+            <div class="input-group">
+                <div [hidden]="!leaveForm.submitted||sendToField.valid" class="required">
+                    * Required
                 </div>
             </div>
         </div>
@@ -169,14 +170,12 @@
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
-                    <mat-icon>email</mat-icon>
+                   <mat-icon>email</mat-icon>
                 </span>
                 </div>
-                <select class="form-control">
-    
-                <option *ngFor="let c of ccToList" [ngValue]="c">{{c}}</option>
-    
-            </select>
+                <select class="form-control" name="CCTo" [(ngModel)]="leaveInstance.CCTo" #CCToField="ngModel" [class.field-error]="leaveForm.submitted && CCToField.invalid">
+             <option *ngFor="let c of ccToList" [ngValue]="c">{{c}}</option>
+             </select>
             </div>
         </div>
     </div>
@@ -187,4 +186,6 @@
             </div>
         </div>
     </div>
+
+
 </form>

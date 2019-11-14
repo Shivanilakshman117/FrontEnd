@@ -7,9 +7,10 @@ export interface employee
     doj:Date,
     department:string,
     designation:string,
-    reportingManager:string,
+
     address:string,
     bloodType:string,
     isManager:string,
-    isAdmin:boolean
+    isAdmin:string,
+    managerName:string
 }

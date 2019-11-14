@@ -20,13 +20,16 @@ export class AddEmployeeComponent implements OnInit {
     doj:null,
     department:null,
     designation:null,
-    reportingManager:null,
+
     address:null,
     bloodType:null,
-    isManager:"0",
-    isAdmin:false
+    isManager:"1",
+    isAdmin:"1",
+    managerName:null
   };
+isManagerChecked:any=true;
 manager:string;
+isAdminChecked:any=true;
 managersList: any = [];
 isHidden=true;
 genders = ['Male', 'Female', 'Other'];
@@ -39,6 +42,7 @@ postErrorMessage=" ";
 postMessage='';
 messageStatus=false;
 today = new Date();
+
 constructor(private dataService:DataService,private lay:LayoutService) {
    
    }
@@ -46,6 +50,7 @@ constructor(private dataService:DataService,private lay:LayoutService) {
   ngOnInit() {
     this.lay.showFoot();
     this.lay.showNav();
+    this.getManagersList();
   }
 
 onHttpError(errorResponse:any)
@@ -63,9 +68,9 @@ PostMessage(message:string)
   this.postMessage=message;
 }
   onSubmit(employeeForm:NgForm)
-  {
+  { console.log("Hi");
     if(employeeForm.valid)  
-    {
+    { console.log(this.employeeInstance);
       this.dataService.postEmployeeForm(this.employeeInstance).subscribe(
       result=>(this.PostMessage(result)),
       error=>this.onHttpError(error)
@@ -75,19 +80,47 @@ PostMessage(message:string)
       else
       {console.log("invalid");
     }
- }
+  
+    if(this.isManagerChecked)
+    {
+      this.employeeInstance.isManager="0";
+    }
+    else
+    {
+      this.employeeInstance.isManager="1";
+    }
+    if(this.isAdminChecked)
+    {
+      this.employeeInstance.isAdmin="0";
+    }
+    else
+    {
+      this.employeeInstance.isAdmin="1";
+    }
 
+ }
+ onCheckManager(e) {
+
+  this.isManagerChecked=e.checked;
+ this.addManager(e);
+  
+}
+onCheckAdmin(e) {
+
+  this.isAdminChecked=e.checked;
+  //console.log("Hi", this.isManagerChecked);
+  
+}
 
   addManager(e)
   {if(e.checked){        
 
     this.isHidden=false;
-    this.employeeInstance.isManager="0";
-
-  }
+   }
  else 
  {
   this.isHidden=true;
+ 
  }
   }
 
@@ -105,7 +138,5 @@ PostMessage(message:string)
     this.managersList = this.tempManagersList;
       console.log(this.managersList);
   }
-  blurManagersList() {
-    this.tempManagersList = [];
-  }
+
 }
