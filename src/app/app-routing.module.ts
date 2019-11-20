@@ -35,7 +35,7 @@ const routes: Routes = [
 
   },
   {
-    path: 'verify-employee',
+    path: 'verify-employee/:id',
     component: VerifyEmployeeComponent,
 
   },
