@@ -19,7 +19,7 @@ const moment = require('moment-business-days');
 export class LeaveComponent implements OnInit {
 
 
-  // leaveTypes = ['Sick Leave', 'Casual Leave', 'Privilege Leave'];
+  leaveTypes = ['Sick Leave', 'Casual Leave', 'Privilege Leave'];
   sessions = [1, 2];
   ccToList: any = [];
   tempCCToList: any = [];
@@ -54,6 +54,9 @@ export class LeaveComponent implements OnInit {
   advanceError=false;
   advanceMessage='';
 
+  eligibleError=false;
+  eligibleMessage='';
+
   constructor(private dataService: DataService, private router: Router,
     private lay: LayoutService) { }
 
@@ -67,15 +70,15 @@ export class LeaveComponent implements OnInit {
     this.getHolidaysList();
     this.updateHolidaysList();
     this.getBalance();
+
    
-
-
   }
-  onSubmit(leaveForm: NgForm) {
-   /* console.log(this.leaveInstance);
-    var result = this.validateForSickLeave(this.leaveInstance.fromDate, this.leaveInstance.leaveType);
 
-    if (result) {
+  onSubmit(leaveForm: NgForm) {
+
+    var sick= this.validateForSickLeave(this.leaveInstance.fromDate, this.leaveInstance.leaveType);
+
+    if (sick) {
       this.sickLeaveError = true;
       this.sickLeaveMessage = "Cannot apply sick leave in advance!";
     }
@@ -93,8 +96,19 @@ export class LeaveComponent implements OnInit {
       this.advanceError=false;
     }
 
-    this.getLeaveDays(this.leaveInstance);*/
-    console.log(this.currentLeaves);
+    this.getLeaveDays(this.leaveInstance);
+    if(!this.isEligibleToApply())
+    {
+      this.eligibleError=true;
+      this.eligibleMessage="Insufficient balance! Cannot apply this leave!";
+    }
+    else
+    {
+      this.eligibleError=false;
+    }
+    this.leaveInstance.days=this.days;
+  this.leaveInstance.balance=this.balance;
+  console.log(this.leaveInstance);
   }
 
   getccToList() {
@@ -152,6 +166,7 @@ export class LeaveComponent implements OnInit {
   getHolidaysList() {
     this.dataService.getHolidaysList().subscribe(list => {
       this.holidaysList = list;
+     
 
 
     })
@@ -179,44 +194,65 @@ export class LeaveComponent implements OnInit {
 
 getLeaveDays(leaveInstance:leave)
 {
-  var diff = moment(leaveInstance.fromDate, 'YYYY-MM-DD').businessDiff(moment(leaveInstance.toDate,'YYYY-MM-DD'));
-  console.log("Diff=",diff);
-  console.log(leaveInstance.fromDate);
+var diff = moment(leaveInstance.fromDate, 'YYYY-MM-DD').businessDiff(moment(leaveInstance.toDate,'YYYY-MM-DD'));
+this.days=diff;
 }
 
 getBalance()
 {
- 
-
   this.dataService.getCurrentLeaves(this.u).subscribe(result=>
     {this.currentLeaves=result;
-  
-    })
+      this.currentLeaves.forEach( leave => {
+        if(leave.Type =='Sick Leave') {
+          this.balance = leave.AllocatedDays - leave.AvailedDays;
 
+        }
+      });
+    });
 
 }
-Types:any[];
-bal:number[];
+
 updateBalance()
 {
-  /*let other = []; // your other array...
-
-  this.currentLeaves.map(item => {
-    return {
-        Type: item.Type,
-        AllocatedDays: item.AllocatedDays
-    }
-}).forEach(item => other.push(item));
-console.log(other); 
-}*/
-
+  
   this.currentLeaves.forEach( leave => {
     if(this.leaveInstance.leaveType == leave.Type) {
       this.balance = leave.AllocatedDays - leave.AvailedDays;
     }
   });
 }
+isEligibleToApply()
+{
+  if(this.days>this.balance)
+  {
+    return false;
+  }
+  else{
+    return true;
+  }
+}
 
+updateDays()
+{
+  if(this.leaveInstance.fromDate!=undefined && this.leaveInstance.toDate!=undefined
+    &&this.leaveInstance.fromSession!=undefined&&this.leaveInstance.toSession!=undefined)
+    {
+      var diff = moment(this.leaveInstance.fromDate, 'YYYY-MM-DD').businessDiff(moment(this.leaveInstance.toDate,'YYYY-MM-DD'));
+      var session = this.sessionDiff(this.leaveInstance.fromSession,this.leaveInstance.toSession);
+      this.days=diff+session;
+      console.log(this.days);
+    }
+}
+sessionDiff(one,two)
+{
+  if(one==two)
+  return 0.5
+  else if(one>two)
+  {return 0}
+  else
+  {return 1;}
+
+}
 }
 
 

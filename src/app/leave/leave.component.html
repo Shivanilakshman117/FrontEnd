@@ -35,7 +35,7 @@
                    <mat-icon>date_range</mat-icon>
                 </span>
                 </div>
-                <input name="fromdate" class="form-control" type="date" required [(ngModel)]="leaveInstance.fromDate" #fromDateField="ngModel" [class.field-error]="leaveForm.submitted && fromDateField.invalid" required>
+                <input name="fromdate" class="form-control" type="date" required [(ngModel)]="leaveInstance.fromDate" #fromDateField="ngModel" [class.field-error]="leaveForm.submitted && fromDateField.invalid" (change)="updateDays()" required>
             </div>
             <div class="input-group">
                 <div [hidden]="!leaveForm.submitted||fromDateField.valid" class="required">
@@ -55,7 +55,7 @@
                    <mat-icon>date_range</mat-icon>
                 </span>
                 </div>
-                <input class="form-control" type="date" name="toDate" [(ngModel)]="leaveInstance.toDate" #toDateField="ngModel" [class.field-error]="leaveForm.submitted && toDateField.invalid" required>
+                <input class="form-control" type="date" name="toDate" [(ngModel)]="leaveInstance.toDate" #toDateField="ngModel" [class.field-error]="leaveForm.submitted && toDateField.invalid" (change)="updateDays()" required>
             </div>
             <div class="input-group">
                 <div [hidden]="!leaveForm.submitted||toDateField.valid" class="required">
@@ -73,7 +73,7 @@
                    <mat-icon>query_builder</mat-icon>
                 </span>
                 </div>
-                <select class="form-control" [(ngModel)]="leaveInstance.fromSession" name="fromSession" #fromSessionField="ngModel" [class.field-error]="leaveForm.submitted && fromSessionField.invalid" required>
+                <select class="form-control" [(ngModel)]="leaveInstance.fromSession" name="fromSession" #fromSessionField="ngModel" [class.field-error]="leaveForm.submitted && fromSessionField.invalid" (change)="updateDays()" required>
              <option *ngFor="let s of sessions" [ngValue]="s">{{s}}</option>
              </select>
             </div>
@@ -91,7 +91,7 @@
                    <mat-icon>query_builder</mat-icon>
                 </span>
                 </div>
-                <select class="form-control" [(ngModel)]="leaveInstance.toSession" name="toSession" #toSessionField="ngModel" [class.field-error]="leaveForm.submitted && toSessionField.invalid" required>
+                <select class="form-control" [(ngModel)]="leaveInstance.toSession" name="toSession" #toSessionField="ngModel" [class.field-error]="leaveForm.submitted && toSessionField.invalid" (change)="updateDays()" required>
              <option *ngFor="let s of sessions" [ngValue]="s">{{s}}</option>
              </select>
                 <div class="input-group" [hidden]>
@@ -127,8 +127,12 @@
                       <mat-icon>arrow_drop_up</mat-icon>
                    </span>
                     </div>
-                    <input class="form-control" type="number" disabled>
+                    <input class="form-control" type="number" [value]=days disabled>
                 </div>
+            </div>
+            <div [hidden]="!eligibleError" class="required">
+                {{eligibleMessage}}
+
             </div>
         </div>
     </div>
