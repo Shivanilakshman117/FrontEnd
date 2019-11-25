@@ -16,6 +16,11 @@ import { LeaveComponent } from './leave/leave.component';
 import * as moment from 'moment';
 import { SetLeaveComponent } from './set-leave/set-leave.component';
 
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { EmployeeAttendanceComponent } from './employee-attendance/employee-attendance.component';
+import { ApproveLeaveComponent } from './approve-leave/approve-leave.component';
+
 
 
 @NgModule({
@@ -28,7 +33,10 @@ import { SetLeaveComponent } from './set-leave/set-leave.component';
     ForgotPasswordComponent,
     VerifyEmployeeComponent,
     LeaveComponent,
-    SetLeaveComponent
+    SetLeaveComponent,
+    EmployeeAttendanceComponent,
+    ApproveLeaveComponent
+
 
   ],
   imports: [
@@ -38,7 +46,11 @@ import { SetLeaveComponent } from './set-leave/set-leave.component';
     BrowserAnimationsModule,
     CustomMaterialModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
 
   ],
   providers: [],

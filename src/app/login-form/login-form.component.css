@@ -1,27 +1,28 @@
-
 ::ng-deep .mat-checkbox-frame {
-    border:1px solid black;
-  }
-  .side{
-      width:90%;
-      height:100%;
-  }
-  .card-body
-  {
-      width:70%;
-      margin-left:3.5em;
-    
-  }
-  .logo
-  {
-      width:15%;
-      height:15%;
-      margin-top:3em;
-      margin-right:4em;
+    border: 1px solid black;
+}
 
-  }
+.side {
+    width: 50%;
+    height: 80%;
+}
 
-  .required
-  {
-      color:red;
-  }
+.card-body {
+    width: 70%;
+    margin-right: 15em;
+}
+
+.logo {
+    width: 15%;
+    height: 15%;
+    margin-top: 3em;
+    margin-right: 18em;
+}
+
+.required {
+    color: red;
+}
+
+.form-align {
+    margin-right: 8em;
+}

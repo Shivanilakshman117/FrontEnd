@@ -1,0 +1,21 @@
+<table class="table">
+    <thead>
+        <tr>
+
+            <th scope="col">Date</th>
+            <th scope="col">Check In</th>
+            <th scope="col">Check Out</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let a of attendance" [ngClass]="{'bgGreen': a.Status == 'P', 
+        'bgRed': a.Status =='U', 
+        'bgOrange': a.Status =='O' }">
+            <td>{{a.Date}}</td>
+            <td>{{a.Checkin}}</td>
+            <td>{{a.Checkout}}</td>
+            <td>{{a.Status}}</td>
+        </tr>
+    </tbody>
+</table>

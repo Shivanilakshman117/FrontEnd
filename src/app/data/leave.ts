@@ -9,5 +9,7 @@ export interface leave
     CCTo:string,
     status:string,
     days:number,
-    balance:number
+    balance:number,
+    leaveId:number,
+    employeeId:string
 }

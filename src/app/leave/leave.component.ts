@@ -20,6 +20,7 @@ export class LeaveComponent implements OnInit {
 
 
   leaveTypes = ['Sick Leave', 'Casual Leave', 'Privilege Leave'];
+  leaveId=[1,2,3];
   sessions = [1, 2];
   ccToList: any = [];
   tempCCToList: any = [];
@@ -39,7 +40,9 @@ export class LeaveComponent implements OnInit {
     CCTo: null,
     days: 0,
     balance: 0,
-    status: 'Applied'
+    status: 'Applied',
+    leaveId:1,
+    employeeId:"P1149"
   }
   u:user=
   {
@@ -56,6 +59,11 @@ export class LeaveComponent implements OnInit {
 
   eligibleError=false;
   eligibleMessage='';
+
+  postError=false;
+postErrorMessage=" ";
+postMessage='';
+messageStatus=false;
 
   constructor(private dataService: DataService, private router: Router,
     private lay: LayoutService) { }
@@ -81,6 +89,7 @@ export class LeaveComponent implements OnInit {
     if (sick) {
       this.sickLeaveError = true;
       this.sickLeaveMessage = "Cannot apply sick leave in advance!";
+   
     }
     else {
       this.sickLeaveError = false;
@@ -108,9 +117,20 @@ export class LeaveComponent implements OnInit {
     }
     this.leaveInstance.days=this.days;
   this.leaveInstance.balance=this.balance;
-  console.log(this.leaveInstance);
-  }
+  this.getLeaveId(this.leaveInstance.leaveType);
+  if(leaveForm.valid&&!this.eligibleError&&!this.advanceError&&!this.sickLeaveError)  
+  { console.log(this.leaveInstance);
+    this.dataService.postLeaveApplication(this.leaveInstance).subscribe(
+    result=>(this.PostMessage(result)),
+    error=>this.onHttpError(error)
+  );
 
+  }
+  else
+  {
+    console.log("validation works");
+  }
+  }
   getccToList() {
 
 
@@ -151,7 +171,7 @@ export class LeaveComponent implements OnInit {
     var today = moment.parseZone(fulldate).format('YYYY-MM-DD');
 
     if ((type.localeCompare('Sick Leave') == 0) && (moment(from).isAfter(today))) {
- 
+     
       return true;
     }
 
@@ -166,8 +186,6 @@ export class LeaveComponent implements OnInit {
   getHolidaysList() {
     this.dataService.getHolidaysList().subscribe(list => {
       this.holidaysList = list;
-     
-
 
     })
   }
@@ -253,7 +271,34 @@ sessionDiff(one,two)
   {return 1;}
 
 }
+
+getLeaveId(leaveType:string)
+{
+for(var i=0;i<this.leaveTypes.length;i++)
+{if(this.leaveTypes[i]===leaveType)
+{
+this.leaveInstance.leaveId=i;
 }
+}
+}
+
+onHttpError(errorResponse:any)
+{
+console.log('error: ',errorResponse);
+this.postError=true;
+this.postErrorMessage=errorResponse.error.error;
+
+
+}
+
+PostMessage(message:any)
+{
+  this.messageStatus=true;
+  this.postMessage=message;
+}
+
+}
+
 
 
 

@@ -19,23 +19,21 @@
 
                 </div>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Feed <span class="sr-only">(current)</span></a>
-            </li>
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" [routerLink]="'/leave'" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Leave
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" [routerLink]="'/leave'">Apply Leave</a>
-                    <a class="dropdown-item" href="#">Approve Leave</a>
+                    <a class="dropdown-item" [routerLink]="'/approve-leave'">Approve Leave</a>
                     <a class="dropdown-item" href="#">Track Leave</a>
 
                 </div>
             </li>
 
             <li class="nav-item ">
-                <a class="nav-link" href="#">Attendance</a>
+                <a class="nav-link" [routerLink]="'/employee-attendance'">Attendance</a>
             </li>
 
         </ul>

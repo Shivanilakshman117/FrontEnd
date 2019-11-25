@@ -1,0 +1,19 @@
+.table {
+    border-radius: 5px;
+    width: 50%;
+    margin: 0px auto;
+    float: none;
+    margin-bottom: 2em;
+}
+
+.bgGreen {
+    background-color: rgb(54, 99, 54);
+}
+
+.bgRed {
+    background-color: rgb(245, 72, 72);
+}
+
+.bgOrange {
+    background-color: rgb(247, 183, 65);
+}

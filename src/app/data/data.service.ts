@@ -8,6 +8,8 @@ import { verifyEmployee } from './verify-employee';
 import { Router, ActivatedRoute,Params } from '@angular/router';
 import { forgotPassword } from './forgot-password';
 import { user } from './user';
+import { leave } from './leave';
+import { approveLeaves } from './approveLeaves';
 
 
 @Injectable({
@@ -77,4 +79,25 @@ export class DataService {
   {
     return this.http.post('https://localhost:44310/api/Values/leavebalance',u);
   }
+
+  postLeaveApplication(application:leave)
+  {
+    return this.http.post('https://localhost:44310/api/Leave/ApplyLeave',application);
+  }
+
+  getAttendance()
+  {
+    return this.http.post('https://localhost:44310/api/Values/GetAttendance',null);
+  }
+  getApplications()
+  {
+    return this.http.post('https://localhost:44310/api/Values/ApproveLeave',null);
+  }
+  postLeaveStatus(approveleaveInstance:approveLeaves)
+  {
+
+    return this.http.post('https://localhost:44310/api/values/changeStatus',approveleaveInstance)
+    
+  }
+
 }

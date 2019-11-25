@@ -9,6 +9,7 @@ import { DataService } from '../data/data.service';
   templateUrl: './add-employee.component.html',
   styleUrls: ['./add-employee.component.css']
 })
+
 export class AddEmployeeComponent implements OnInit {
 
   employeeInstance:employee={
@@ -25,7 +26,7 @@ export class AddEmployeeComponent implements OnInit {
     bloodType:null,
     isManager:"1",
     isAdmin:"1",
-    managerName:null
+    managerName:null,
   };
 isManagerChecked:any=true;
 manager:string;
@@ -42,6 +43,7 @@ postErrorMessage=" ";
 postMessage='';
 messageStatus=false;
 today = new Date();
+test = false;
 
 constructor(private dataService:DataService,private lay:LayoutService) {
    
@@ -68,8 +70,7 @@ PostMessage(message:string)
   this.postMessage=message;
 }
   onSubmit(employeeForm:NgForm)
-  { console.log("Hi");
-    if(employeeForm.valid)  
+  {    if(employeeForm.valid)  
     { console.log(this.employeeInstance);
       this.dataService.postEmployeeForm(this.employeeInstance).subscribe(
       result=>(this.PostMessage(result)),
@@ -80,7 +81,7 @@ PostMessage(message:string)
       else
       {console.log("invalid");
     }
-  
+        
     if(this.isManagerChecked)
     {
       this.employeeInstance.isManager="0";
@@ -106,7 +107,6 @@ PostMessage(message:string)
   
 }
 onCheckAdmin(e) {
-
   this.isAdminChecked=e.checked;
   //console.log("Hi", this.isManagerChecked);
   

@@ -1,11 +1,7 @@
-.button {
-    width: 2em;
-    margin-right: 1em;
-}
-
 .table {
     border-radius: 5px;
-    width: 50%;
+    width: 70%;
     margin: 0px auto;
     float: none;
+    margin-bottom: 2em;
 }
