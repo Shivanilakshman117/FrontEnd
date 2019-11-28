@@ -1,29 +1,29 @@
-.card{
-    padding:1.5em;
-    width:40em;
+.card {
+    padding: 1.5em;
+    width: 25em;
 }
+
 .container {
     display: flex;
     justify-content: center;
+}
 
-  }
-  form{
-      margin-bottom:1em;
-  }
-  .space
-  {
-      margin-left:2em;
-  }
-  ::ng-deep .mat-checkbox-frame {
-    border:1px solid black;
-  }
- .checkboxspace
- {
-     width:50%;
-    
- }
- 
- .required
- {
-     color:red;
- }
+form {
+    margin-bottom: 1em;
+}
+
+.space {
+    margin-left: 2em;
+}
+
+ ::ng-deep .mat-checkbox-frame {
+    border: 1px solid black;
+}
+
+.checkboxspace {
+    width: 50%;
+}
+
+.required {
+    color: red;
+}

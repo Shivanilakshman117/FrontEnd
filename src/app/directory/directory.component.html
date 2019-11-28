@@ -1,0 +1,22 @@
+<div class="row" *ngFor="let e of employeesList">
+
+    <div class="card">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src={{e.Image}} class="image-box" alt="contact">
+                </div>
+                <div class="col-sm-4">
+                    <h4>{{e.Name}}</h4>
+                    <p class="title">{{e.Designation}},{{e.Department}}</p>
+                    <p><b>Mobile : </b>{{e.Mobile}}</p>
+                    <p><b>Email : </b>{{e.Email}}</p>
+                    <p><b>Date of Birth : </b>{{e.DOB | date:'mediumDate'}}</p>
+                    <p><b>Address : </b>{{e.Address}}</p>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

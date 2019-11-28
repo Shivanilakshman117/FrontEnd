@@ -3,6 +3,7 @@ import { LayoutService } from '../layout.service';
 import { employee } from '../data/employee';
 import { NgForm } from '@angular/forms';
 import { DataService } from '../data/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-employee',
@@ -24,7 +25,7 @@ export class AddEmployeeComponent implements OnInit {
 
     address:null,
     bloodType:null,
-    isManager:"1",
+    isManager:"0",
     isAdmin:"1",
     managerName:null,
   };
@@ -39,13 +40,13 @@ designations=['CEO','COO','Head','Manager','Senior Developer','Junior Developer'
 bloodTypes=['A+','A-','B+','B-','O+','O-','AB+','AB-'];
 tempManagersList:any=[];
 postError=false;
-postErrorMessage=" ";
+postErrorMessage="Unable to connect to server";
 postMessage='';
 messageStatus=false;
 today = new Date();
 test = false;
 
-constructor(private dataService:DataService,private lay:LayoutService) {
+constructor(private dataService:DataService,private lay:LayoutService,private router:Router) {
    
    }
 
@@ -59,9 +60,7 @@ onHttpError(errorResponse:any)
 {
 console.log('error: ',errorResponse);
 this.postError=true;
-this.postErrorMessage=errorResponse.error.error;
-
-
+this.postErrorMessage="Unable to connect to server";
 }
 
 PostMessage(message:string)
@@ -70,34 +69,17 @@ PostMessage(message:string)
   this.postMessage=message;
 }
   onSubmit(employeeForm:NgForm)
-  {    if(employeeForm.valid)  
-    { console.log(this.employeeInstance);
+  {  if(employeeForm.valid)  
+    { this.employeeInstance.isManager= this.isManagerChecked ? "0":"1";
+ 
+      this.employeeInstance.isAdmin=this.isAdminChecked ? "1":"0";
+
       this.dataService.postEmployeeForm(this.employeeInstance).subscribe(
       result=>(this.PostMessage(result)),
       error=>this.onHttpError(error)
     );
-    console.log("valid");
+    
       }
-      else
-      {console.log("invalid");
-    }
-        
-    if(this.isManagerChecked)
-    {
-      this.employeeInstance.isManager="0";
-    }
-    else
-    {
-      this.employeeInstance.isManager="1";
-    }
-    if(this.isAdminChecked)
-    {
-      this.employeeInstance.isAdmin="0";
-    }
-    else
-    {
-      this.employeeInstance.isAdmin="1";
-    }
 
  }
  onCheckManager(e) {
@@ -107,9 +89,7 @@ PostMessage(message:string)
   
 }
 onCheckAdmin(e) {
-  this.isAdminChecked=e.checked;
-  //console.log("Hi", this.isManagerChecked);
-  
+  this.isAdminChecked=e.checked; 
 }
 
   addManager(e)
@@ -136,7 +116,7 @@ onCheckAdmin(e) {
       }
     );
     this.managersList = this.tempManagersList;
-      console.log(this.managersList);
+
   }
 
 }

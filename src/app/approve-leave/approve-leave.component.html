@@ -1,4 +1,4 @@
-<table class="table table-bordered">
+<table class="table table-bordered" [hidden]="isListEmpty">
     <thead>
         <tr>
             <th scope="col">ID</th>
@@ -23,8 +23,9 @@
             <td>{{app.ToSession}}</td>
             <td>{{diff(app.ToDate,app.FromDate)}}</td>
             <td>{{app.Reason}}</td>
-            <td class="btn-group"><button type="button" class="btn btn-success">Approve</button>
+            <td class="btn-group"><button type="button" (click)="Approve(app.LeaveApplicationId)" class="btn btn-success">Approve</button>
                 <button type="button" class="btn btn-danger" (click)="Reject(app.LeaveApplicationId)">Reject</button></td>
         </tr>
     </tbody>
 </table>
+<p class="alert alert-info center-display text-center" *ngIf="isListEmpty">You do not have any leave applications to approve</p>

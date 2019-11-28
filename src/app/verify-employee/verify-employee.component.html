@@ -6,7 +6,7 @@
         <h4 class="card-title text-center mb-4 mt-1">Set-up Account</h4>
         <p>Please fill the following to set up your account</p>
 
-        <form class="card container" #verifyAccountForm="ngForm" (ngSubmit)="onSubmit(verifyAccountForm)">
+        <form class="card container" #verifyAccountForm="ngForm" (ngSubmit)="onSubmit(verifyAccountForm)" autocomplete="off">
 
             <div class="form-group">
                 <div class="input-group">
@@ -46,7 +46,10 @@
                             <mat-icon>contact_support</mat-icon>
                         </span>
                     </div>
-                    <input class="form-control" type="text" placeholder="Enter your security question" name="securityQuestion" required [(ngModel)]="verifyAccountInstance.securityQuestion" #securityQuestionField="ngModel" [class.field-error]="verifyAccountForm.submitted && securityQuestionField.invalid">
+
+                    <select name="securityQuestion" class="form-control " [(ngModel)]="verifyAccountInstance.securityQuestion" #securityQuestionField="ngModel">
+                        <option *ngFor="let q of questions" >{{q}}</option>
+                        </select>
                 </div>
                 <div class="input-group">
                     <div [hidden]="(!verifyAccountForm.submitted||securityQuestionField.valid)" class="required">

@@ -29,6 +29,11 @@ export class DataService {
     //return of(loginInstance);
   }
 
+  getUserDetails()
+  {
+    return this.http.get('https://localhost:44310/api/login/authenticate');
+  }
+
   postEmployeeForm(employeeInstance:employee): Observable<any>
   {
     
@@ -61,9 +66,6 @@ export class DataService {
     ${verifyEmployeeInstance.securityQuestion}&answer=${verifyEmployeeInstance.answer}`;
     let t= id.toString();
     let url='https://localhost:44310/api/AddEmployee/newemployee/VerifyAccount/'.concat(t);
-   
-    console.log(url);
-
     return this.http.post(url,verifyEmployeeInstance);
     
     
@@ -75,9 +77,9 @@ export class DataService {
     
     
   }
-  getCurrentLeaves(u:user):Observable<any>
+  getCurrentLeaves():Observable<any>
   {
-    return this.http.post('https://localhost:44310/api/Values/leavebalance',u);
+    return this.http.post('https://localhost:44310/api/Values/leavebalance',null);
   }
 
   postLeaveApplication(application:leave)
@@ -98,6 +100,10 @@ export class DataService {
 
     return this.http.post('https://localhost:44310/api/values/changeStatus',approveleaveInstance)
     
+  }
+  getSecurityQuestions():Observable<any>
+  {
+    return this.http.post('https://localhost:44310/api/Values/securityQuestion',null);
   }
 
 }

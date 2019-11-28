@@ -5,6 +5,8 @@ import { DataService } from '../data/data.service';
 import { Router } from '@angular/router';
 import { FooterComponent } from '../layouts/footer/footer.component';
 import { LayoutService } from '../layout.service';
+import { user } from '../data/user';
+
 
 @Component({
   selector: 'app-login-form',
@@ -20,6 +22,8 @@ loginInstance:login =
   grant_type:'password'
 
 };
+
+
 postError=false;
 postErrorMessage=" ";
   constructor(private dataService:DataService, private router: Router,private lay:LayoutService) { }
@@ -40,10 +44,18 @@ onSubmit(loginForm:NgForm)
 {
 
 this.dataService.postLoginForm(this.loginInstance).subscribe(
-  result=>{console.log(result);this.router.navigate(['/add-employee'])},
+  result=>{ localStorage.setItem('token',result.access_token);
+
+  this.router.navigate(['/directory']);},
   error=>this.onHttpError(error)
   
 );
+/*this.dataService.getUserDetails().subscribe(
+  result=>{this.user=result;},
+  error=>{console.log(error);
+ }
+)*/
+
 }
 
 redirect() {

@@ -1,18 +1,61 @@
-<table class="table">
+<form class="form-inline d-flex p-3 filter-row justify-content-around">
+    <div class="form-group mb-2">
+        <label>From</label>
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+               <mat-icon>date_range</mat-icon>
+            </span>
+            </div>
+            <input class="form-control" type="date" name="fromDate" [(ngModel)]="fromDate">
+        </div>
+    </div>
+    <div class="form-group mb-2">
+        <label>To</label>
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+               <mat-icon>date_range</mat-icon>
+            </span>
+            </div>
+            <input class="form-control" type="date" name="toDate" [(ngModel)]="toDate">
+        </div>
+    </div>
+    <div class="form-group mb-2">
+        <label for="Leave Type">Filter by</label>
+        <div class="form-group input-group" required>
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                   <mat-icon>filter_list</mat-icon>
+                </span>
+            </div>
+
+            <select name="filter" class="form-control" name="searchText" [(ngModel)]="searchText">
+             <option *ngFor="let f of filters" [ngValue]="f">{{f}}</option>
+             </select>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-info mb-2">Track</button>
+</form>
+
+<p class="alert alert-info text-center center-display" *ngIf="isListEmpty">Attendance has not yet been updated! Please try later!</p>
+
+<table class="table" [hidden]="isListEmpty">
     <thead>
         <tr>
 
-            <th scope="col">Date</th>
-            <th scope="col">Check In</th>
-            <th scope="col">Check Out</th>
-            <th scope="col">Status</th>
+            <th scope="col ">Date</th>
+            <th scope="col ">Check In</th>
+            <th scope="col ">Check Out</th>
+            <th scope="col ">Status</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let a of attendance" [ngClass]="{'bgGreen': a.Status == 'P', 
-        'bgRed': a.Status =='U', 
-        'bgOrange': a.Status =='O' }">
-            <td>{{a.Date}}</td>
+        <tr *ngFor="let a of attendance | filter : 'Status': searchText; let i = index" [ngClass]="{ 'bgGreen': a.Status=='Present' , 
+        'bgRed': a.Status=='Undertime' , 'bgOrange': a.Status=='Overtime' , 
+        'bgGrey': a.Status=='Absent'}">
+            <td>{{a.Date | date:'mediumDate'}}</td>
             <td>{{a.Checkin}}</td>
             <td>{{a.Checkout}}</td>
             <td>{{a.Status}}</td>

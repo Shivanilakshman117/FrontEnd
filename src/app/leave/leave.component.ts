@@ -42,13 +42,9 @@ export class LeaveComponent implements OnInit {
     balance: 0,
     status: 'Applied',
     leaveId:1,
-    employeeId:"P1149"
+    employeeId:" "
   }
-  u:user=
-  {
-    employeeId:"P1149",
-    token:"abc"
-  }
+ 
   holidaysList: any[];
   currentLeaves: any[];
   sickLeaveError = false;
@@ -119,17 +115,14 @@ messageStatus=false;
   this.leaveInstance.balance=this.balance;
   this.getLeaveId(this.leaveInstance.leaveType);
   if(leaveForm.valid&&!this.eligibleError&&!this.advanceError&&!this.sickLeaveError)  
-  { console.log(this.leaveInstance);
+  {
     this.dataService.postLeaveApplication(this.leaveInstance).subscribe(
     result=>(this.PostMessage(result)),
     error=>this.onHttpError(error)
   );
 
   }
-  else
-  {
-    console.log("validation works");
-  }
+ 
   }
   getccToList() {
 
@@ -145,6 +138,7 @@ messageStatus=false;
       }
     );
     this.ccToList = this.tempCCToList;
+    console.log(this.ccToList);
 
   }
 
@@ -218,7 +212,7 @@ this.days=diff;
 
 getBalance()
 {
-  this.dataService.getCurrentLeaves(this.u).subscribe(result=>
+  this.dataService.getCurrentLeaves().subscribe(result=>
     {this.currentLeaves=result;
       this.currentLeaves.forEach( leave => {
         if(leave.Type =='Sick Leave') {
@@ -277,7 +271,8 @@ getLeaveId(leaveType:string)
 for(var i=0;i<this.leaveTypes.length;i++)
 {if(this.leaveTypes[i]===leaveType)
 {
-this.leaveInstance.leaveId=i;
+this.leaveInstance.leaveId=i+1;
+
 }
 }
 }

@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" [routerLink]="'/add-employee'" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" style="color:white;" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Admin
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -21,7 +21,7 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" [routerLink]="'/leave'" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" style="color:white;" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Leave
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -33,14 +33,18 @@
             </li>
 
             <li class="nav-item ">
-                <a class="nav-link" [routerLink]="'/employee-attendance'">Attendance</a>
+                <a class="nav-link" style="color:white;" [routerLink]="'/employee-attendance'">Attendance</a>
             </li>
+            <li class="nav-item ">
+                <a class="nav-link" style="color:white;" [routerLink]="'/directory'">Directory</a>
+            </li>
+
 
         </ul>
 
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Logout</a>
+                <a class="nav-link" style="color:white;" [routerLink]="'/logout'">Logout</a>
             </li>
         </ul>
 

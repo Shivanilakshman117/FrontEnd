@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data/data.service';
 import * as moment from 'moment';
+import { LayoutService } from '../layout.service';
 
 
 
@@ -13,10 +14,10 @@ export class SetLeaveComponent implements OnInit {
 
   holidays:any[];
 
-  constructor(private hols:DataService) { }
+  constructor(private hols:DataService,private lay: LayoutService) { }
 
   ngOnInit() {
-
+    this.lay.hideFoot();
     this.hols.getHolidaysList().subscribe(list=>{
       this.holidays=list;
       console.log(this.holidays);

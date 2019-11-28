@@ -9,6 +9,9 @@ import { SetLeaveComponent } from './set-leave/set-leave.component';
 
 import { EmployeeAttendanceComponent } from './employee-attendance/employee-attendance.component';
 import { ApproveLeaveComponent } from './approve-leave/approve-leave.component';
+import { DirectoryComponent } from './directory/directory.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { LogoutComponent } from './logout/logout.component';
 
 
 const routes: Routes = [
@@ -47,15 +50,27 @@ const routes: Routes = [
     component:SetLeaveComponent,
   },
   {
-    path:'attendance',
+    path:'employee-attendance',
     component:EmployeeAttendanceComponent,
   },
   {
     path:'approve-leave',
     component:ApproveLeaveComponent,
-  }
-  // otherwise redirect to login
-  //{ path: '**', redirectTo: '' }
+  },
+  {
+    path:'directory',
+    component:DirectoryComponent,
+  },
+  {
+    path:'error-page',
+    component:ErrorPageComponent,
+  },
+  {
+    path:'logout',
+    component:LogoutComponent,
+  },
+  { path: '**', redirectTo: 'error-page' },
+
 ];
 
 

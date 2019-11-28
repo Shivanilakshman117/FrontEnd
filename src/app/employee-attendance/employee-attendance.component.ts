@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data/data.service';
 import { LayoutService } from '../layout.service';
 
+
 @Component({
   selector: 'app-employee-attendance',
   templateUrl: './employee-attendance.component.html',
@@ -11,11 +12,16 @@ export class EmployeeAttendanceComponent implements OnInit {
 
   attendance:any[];
   tempAttendance:any=[];
+  fromDate:Date;
+  toDate:Date;
+  filters=['Overtime', 'UnderTime', 'Present','Absent','None'];
+  public searchText: string;
+  empty:boolean;
   constructor(private dataService:DataService, private lay: LayoutService) { }
 
   ngOnInit() {
 
-    this.lay.showFoot();
+    this.lay.hideFoot();
     this.lay.showNav();
     this.getAttendance()
 
@@ -32,8 +38,18 @@ export class EmployeeAttendanceComponent implements OnInit {
     );
 
     this.attendance = this.tempAttendance;
+   this.empty=this.attendance.length==0 ? true:false;
+console.log(this.attendance.length==0,this.empty);
+  }
 
-
+  track()
+  {
+    this.attendance.forEach(row=>
+      {
+        if(row.Status=='!Overtime')
+        this.attendance.pop();
+      });
+      console.log(this.attendance);
   }
 }
 

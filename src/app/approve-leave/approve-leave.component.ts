@@ -12,10 +12,11 @@ const moment = require('moment-business-days');
 export class ApproveLeaveComponent implements OnInit {
 applications:any=[];
 tempApplications:any=[];
+isListEmpty:boolean;
   constructor(private dataService:DataService, private lay: LayoutService) { }
 
   ngOnInit() {
-    this.lay.showFoot();
+    this.lay.hideFoot();
     this.lay.showNav();
     this.ApproveLeaves();
   }
@@ -35,8 +36,10 @@ approveLeaveInstance:approveLeaves=
       )
     }
   );
+  
+this.applications = this.tempApplications;
 
-  this.applications = this.tempApplications;
+this.isListEmpty= this.applications.length==0 ? true:false;
 
   }
 
@@ -48,8 +51,17 @@ approveLeaveInstance:approveLeaves=
   Reject(id:number)
   { 
     this.approveLeaveInstance.id=id;
-    this.approveLeaveInstance.status="rejected";
+    this.approveLeaveInstance.status="Rejected";
+    this.dataService.postLeaveStatus(this.approveLeaveInstance).subscribe();
+    window.location.reload();
+  }
 
- this.dataService.postLeaveStatus(this.approveLeaveInstance).subscribe(result=>{console.log(result)});
+  Approve(id:number)
+  {
+    this.approveLeaveInstance.id=id;
+    this.approveLeaveInstance.status="Approved";
+
+    this.dataService.postLeaveStatus(this.approveLeaveInstance).subscribe();
+    window.location.reload();
   }
 }

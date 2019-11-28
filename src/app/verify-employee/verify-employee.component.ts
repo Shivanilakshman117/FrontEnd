@@ -28,14 +28,22 @@ passwordMismatchMessage="nil";
 postSuccess=false;
 postSuccessMessage=" ";
 
+questions:any=[];
   
   constructor(private lay:LayoutService, private dataService:DataService,private router:Router,private route:ActivatedRoute) { }
 
   ngOnInit() {
     this.lay.showFoot();
     this.lay.hideNav();
-  
+    this.getSecurityQuestions(); 
+  }
+
+  getSecurityQuestions()
+  {
+    this.dataService.getSecurityQuestions().subscribe(list=>{
+      this.questions=list;
    
+    })
   }
 
 onSubmit(verifyAccountForm:NgForm)
@@ -46,12 +54,21 @@ onSubmit(verifyAccountForm:NgForm)
     this.passwordMismatchMessage="Passwords do not match";
     
   }
+  else
+  {
+    this.passwordMismatch=false;
+    this.passwordMismatchMessage=" ";
+  }
 
   var id= this.route.snapshot.params.id;
-
-  this.dataService.postForVerifyEmployee(this.verifyAccountInstance, id).subscribe(
+if(verifyAccountForm.valid && !this.passwordMismatch)
+{
+    this.dataService.postForVerifyEmployee(this.verifyAccountInstance, id).subscribe(
     result=>this.onSuccess(result),
     error=>this.onHttpError(error));
+  
+}
+
 }
 
 onHttpError(errorResponse:any)

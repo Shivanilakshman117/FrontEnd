@@ -1,5 +1,7 @@
 export interface user
 {
-    token:string,
+    name:string,
     employeeId:string
 }
+
+

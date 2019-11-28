@@ -4,6 +4,7 @@
     margin: 0px auto;
     float: none;
     margin-bottom: 2em;
+    margin-top: 2em;
 }
 
 .bgGreen {
@@ -16,4 +17,20 @@
 
 .bgOrange {
     background-color: rgb(247, 183, 65);
+}
+
+.bgGrey {
+    background-color: rgb(179, 173, 163);
+}
+
+label {
+    margin-right: 4px;
+}
+
+.filter-row {
+    background-color: whitesmoke;
+}
+
+.center-display {
+    margin: 2em 6em;
 }

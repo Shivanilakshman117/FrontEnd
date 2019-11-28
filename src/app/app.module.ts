@@ -15,12 +15,14 @@ import { VerifyEmployeeComponent } from './verify-employee/verify-employee.compo
 import { LeaveComponent } from './leave/leave.component';
 import * as moment from 'moment';
 import { SetLeaveComponent } from './set-leave/set-leave.component';
-
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { EmployeeAttendanceComponent } from './employee-attendance/employee-attendance.component';
 import { ApproveLeaveComponent } from './approve-leave/approve-leave.component';
-
+import { FilterPipe } from './filter.pipe';
+import { DirectoryComponent } from './directory/directory.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorService } from './interceptor.service';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { LogoutComponent } from './logout/logout.component';
 
 
 @NgModule({
@@ -35,7 +37,11 @@ import { ApproveLeaveComponent } from './approve-leave/approve-leave.component';
     LeaveComponent,
     SetLeaveComponent,
     EmployeeAttendanceComponent,
-    ApproveLeaveComponent
+    ApproveLeaveComponent,
+    FilterPipe,
+    DirectoryComponent,
+    ErrorPageComponent,
+    LogoutComponent
 
 
   ],
@@ -47,13 +53,14 @@ import { ApproveLeaveComponent } from './approve-leave/approve-leave.component';
     CustomMaterialModule,
     HttpClientModule,
     ReactiveFormsModule,
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory
-    })
-
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

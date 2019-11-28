@@ -13,7 +13,7 @@
             <article class="card-body">
                 <h4 class="card-title text-center mb-4 mt-1">Sign in</h4>
 
-                <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+                <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" autocomplete="off">
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -46,9 +46,8 @@
                             </div>
                         </div>
                     </div>
-                    <!-- input-group.// -->
-                    <!-- form-group// -->
-                    <div [hidden]="!postError" class="alert alert-danger">
+
+                    <div [hidden]="!postError" class="alert alert-info">
                         {{postErrorMessage}}
 
                     </div>

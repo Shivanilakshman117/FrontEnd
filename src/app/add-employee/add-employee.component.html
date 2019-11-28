@@ -1,4 +1,4 @@
-<form class="card container" #employeeForm="ngForm" (ngSubmit)="onSubmit(employeeForm)">
+<form class="card container" #employeeForm="ngForm" (ngSubmit)="onSubmit(employeeForm)" autocomplete="off">
 
 
     <div class="form-group">
@@ -61,7 +61,7 @@
                 <mat-icon>phone</mat-icon>
             </span>
         </div>
-        <input name="mobile" class="form-control" placeholder="Mobile number" type="text" required [(ngModel)]="employeeInstance.mobile" #mobileField="ngModel" [class.field-error]="employeeForm.submitted && mobileField.invalid" min="1" max="5">
+        <input name="mobile" class="form-control" placeholder="Mobile number" type="number" required [(ngModel)]="employeeInstance.mobile" #mobileField="ngModel" [class.field-error]="employeeForm.submitted && mobileField.invalid" min="6000000000" max="9999999999">
 
         <div class="input-group">
             <div [hidden]="!employeeForm.submitted||mobileField.valid" class="required">
@@ -206,7 +206,7 @@
         {{postErrorMessage}}
 
     </div>
-    <div [hidden]="!messageStatus " class="alert alert-danger ">
+    <div [hidden]="!messageStatus " class="alert alert-info ">
         {{postMessage}}
 
     </div>
