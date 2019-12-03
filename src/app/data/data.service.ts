@@ -16,6 +16,7 @@ import { approveLeaves } from './approveLeaves';
   providedIn: 'root'
 })
 export class DataService {
+ 
   
   constructor(private http:HttpClient,private route: ActivatedRoute) { }
   
@@ -104,6 +105,16 @@ export class DataService {
   getSecurityQuestions():Observable<any>
   {
     return this.http.post('https://localhost:44310/api/Values/securityQuestion',null);
+  }
+  getMyLeaves():Observable<any>
+  {
+    return this.http.post('https://localhost:44310/api/Values/TrackLeave',null);
+  }
+
+  getMySecurityQuestion(id:string)
+  {
+    let t= id.toString();
+    return this.http.get('https://localhost:44310/api/Values/getMySecurityQuestion/'.concat(t));
   }
 
 }

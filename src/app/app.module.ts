@@ -23,6 +23,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './interceptor.service';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { LogoutComponent } from './logout/logout.component';
+import { TrackLeaveComponent } from './track-leave/track-leave.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { LogoutComponent } from './logout/logout.component';
     FilterPipe,
     DirectoryComponent,
     ErrorPageComponent,
-    LogoutComponent
+    LogoutComponent,
+    TrackLeaveComponent
 
 
   ],

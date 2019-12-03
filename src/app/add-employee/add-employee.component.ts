@@ -26,7 +26,7 @@ export class AddEmployeeComponent implements OnInit {
     address:null,
     bloodType:null,
     isManager:"0",
-    isAdmin:"1",
+    isAdmin:"0",
     managerName:null,
   };
 isManagerChecked:any=true;
@@ -72,7 +72,7 @@ PostMessage(message:string)
   {  if(employeeForm.valid)  
     { this.employeeInstance.isManager= this.isManagerChecked ? "0":"1";
  
-      this.employeeInstance.isAdmin=this.isAdminChecked ? "1":"0";
+      this.employeeInstance.isAdmin=this.isAdminChecked ? "0":"1";
 
       this.dataService.postEmployeeForm(this.employeeInstance).subscribe(
       result=>(this.PostMessage(result)),

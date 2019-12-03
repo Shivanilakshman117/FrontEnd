@@ -13,9 +13,9 @@
                     Admin
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" [routerLink]="'/add-employee'">Add Associate</a>
-                    <a class="dropdown-item" [routerLink]="'/add-employee'">Edit Associate</a>
-                    <a class="dropdown-item" [routerLink]="'/set-leave'">Set Leave</a>
+                    <a class="dropdown-item" [routerLinkActive]="['active']" [routerLink]="'/add-employee'">Add Associate</a>
+                    <a class="dropdown-item" [routerLinkActive]="['active']" [routerLink]="'/add-employee'">Edit Associate</a>
+                    <a class="dropdown-item" [routerLinkActive]="['active']" [routerLink]="'/set-leave'">Set Leave</a>
 
                 </div>
             </li>
@@ -25,18 +25,18 @@
                     Leave
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" [routerLink]="'/leave'">Apply Leave</a>
-                    <a class="dropdown-item" [routerLink]="'/approve-leave'">Approve Leave</a>
-                    <a class="dropdown-item" href="#">Track Leave</a>
+                    <a class="dropdown-item" [routerLinkActive]="['active']" [routerLink]="'/leave'">Apply Leave</a>
+                    <a class="dropdown-item" [routerLinkActive]="['active']" [routerLink]="'/approve-leave'">Approve Leave</a>
+                    <a class="dropdown-item" [routerLinkActive]="['active']" [routerLink]="'/track-leave'">Track Leave</a>
 
                 </div>
             </li>
 
             <li class="nav-item ">
-                <a class="nav-link" style="color:white;" [routerLink]="'/employee-attendance'">Attendance</a>
+                <a class="nav-link" style="color:white;" [routerLinkActive]="['active']" [routerLink]="'/employee-attendance'">Attendance</a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" style="color:white;" [routerLink]="'/directory'">Directory</a>
+                <a class="nav-link" style="color:white;" [routerLinkActive]="['active']" [routerLink]="'/directory'">Directory</a>
             </li>
 
 
@@ -44,7 +44,7 @@
 
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" style="color:white;" [routerLink]="'/logout'">Logout</a>
+                <a class="nav-link" style="color:white;" [routerLinkActive]="['active']" [routerLink]="'/logout'">Logout</a>
             </li>
         </ul>
 

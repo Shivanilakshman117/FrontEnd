@@ -43,9 +43,10 @@ this.isListEmpty= this.applications.length==0 ? true:false;
 
   }
 
-  diff(a,b)
+  diff(fd,td,fs,ts)
   {
-    return moment(b, 'YYYY-MM-DD').businessDiff(moment(a,'YYYY-MM-DD'));
+    var sessionDiff=this.sessionDiff(fs,ts);
+    return (moment(td, 'YYYY-MM-DD').businessDiff(moment(fd,'YYYY-MM-DD')) + sessionDiff);
   }
 
   Reject(id:number)
@@ -64,4 +65,14 @@ this.isListEmpty= this.applications.length==0 ? true:false;
     this.dataService.postLeaveStatus(this.approveLeaveInstance).subscribe();
     window.location.reload();
   }
+  sessionDiff(one,two)
+{
+  if(one==two)
+  return 0.5
+  else if(one>two)
+  {return 0}
+  else
+  {return 1;}
+
+}
 }

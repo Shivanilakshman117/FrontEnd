@@ -18,12 +18,15 @@ forgotPasswordInstance:forgotPassword=
   securityQuestion:null,
   answer:null
 }
+
 postSuccess=false;
 postSuccessMessage=" ";
 
 postError=false;
 postErrorMessage=" ";
 
+id:string;
+idError:boolean;
   constructor(private lay:LayoutService,private dataService:DataService,private router:Router,private route:ActivatedRoute) { }
 
   ngOnInit() {
@@ -33,10 +36,7 @@ postErrorMessage=" ";
 
 onSubmit(forgotPasswordForm:NgForm)
 {
-  //console.log(this.forgotPasswordInstance.employeeId,
-    //this.forgotPasswordInstance.answer,this.forgotPasswordInstance.securityQuestion);
-
-    
+  
   this.dataService.postForForgotPassword(this.forgotPasswordInstance).subscribe(
     result=>this.onSuccess(result),
     error=>this.onHttpError(error));
@@ -55,6 +55,15 @@ onSuccess(result:any)
 
 this.postSuccess=true;
 this.postSuccessMessage=result;
+
+}
+getQuestion()
+{
+  this.dataService.getMySecurityQuestion(this.forgotPasswordInstance.employeeId).subscribe(
+  result=>{this.forgotPasswordInstance.securityQuestion=result.toString();
+  },
+  error=>this.onHttpError(error));
+  
 
 }
 }

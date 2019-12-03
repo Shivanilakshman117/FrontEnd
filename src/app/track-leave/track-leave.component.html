@@ -1,31 +1,30 @@
 <table class="table table-bordered" [hidden]="isListEmpty">
     <thead>
         <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
+            <th scope="col">Type</th>
             <th scope="col">From Date</th>
             <th scope="col">To Date</th>
             <th scope="col">From Session</th>
             <th scope="col">To Session</th>
             <th scope="col">Days</th>
             <th scope="col">Reason</th>
-            <th scope="col">Action</th>
+            <th scope="col">Status</th>
 
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let app of applications">
-            <td>{{app.LeaveApplicationId}}</td>
-            <td>{{app.Name}}</td>
+            <td>{{app.Type}}</td>
             <td>{{app.FromDate | date:'mediumDate'}}</td>
             <td>{{app.ToDate | date:'mediumDate'}}</td>
             <td>{{app.FromSession}}</td>
             <td>{{app.ToSession}}</td>
             <td>{{diff(app.ToDate,app.FromDate,app.FromSession,app.ToSession)}}</td>
             <td>{{app.Reason}}</td>
-            <td class="btn-group"><button type="button" (click)="Approve(app.LeaveApplicationId)" class="btn btn-success">Approve</button>
-                <button type="button" class="btn btn-danger" (click)="Reject(app.LeaveApplicationId)">Reject</button></td>
+            <td>{{app.Status}}</td>
+
+
         </tr>
     </tbody>
 </table>
-<p class="alert alert-info center-display text-center" *ngIf="isListEmpty">You do not have any leave applications to approve</p>
+<p class="alert alert-info center-display text-center" *ngIf="isListEmpty">You have not taken any leave this year!</p>

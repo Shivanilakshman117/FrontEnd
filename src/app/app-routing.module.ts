@@ -12,6 +12,7 @@ import { ApproveLeaveComponent } from './approve-leave/approve-leave.component';
 import { DirectoryComponent } from './directory/directory.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { LogoutComponent } from './logout/logout.component';
+import { TrackLeaveComponent } from './track-leave/track-leave.component';
 
 
 const routes: Routes = [
@@ -56,6 +57,10 @@ const routes: Routes = [
   {
     path:'approve-leave',
     component:ApproveLeaveComponent,
+  },
+  {
+    path:'track-leave',
+    component:TrackLeaveComponent,
   },
   {
     path:'directory',

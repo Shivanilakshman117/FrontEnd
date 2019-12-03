@@ -50,11 +50,7 @@ this.dataService.postLoginForm(this.loginInstance).subscribe(
   error=>this.onHttpError(error)
   
 );
-/*this.dataService.getUserDetails().subscribe(
-  result=>{this.user=result;},
-  error=>{console.log(error);
- }
-)*/
+
 
 }
 
