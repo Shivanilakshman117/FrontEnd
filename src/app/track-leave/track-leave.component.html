@@ -1,4 +1,4 @@
-<table class="table table-bordered" [hidden]="isListEmpty">
+<table class="table table-bordered" [hidden]="!isListEmpty">
     <thead>
         <tr>
             <th scope="col">Type</th>
@@ -27,4 +27,4 @@
         </tr>
     </tbody>
 </table>
-<p class="alert alert-info center-display text-center" *ngIf="isListEmpty">You have not taken any leave this year!</p>
+<p class="alert alert-info center-display text-center" *ngIf="!isListEmpty">You have not taken any leave this year!</p>

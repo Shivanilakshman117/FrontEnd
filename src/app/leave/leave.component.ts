@@ -128,7 +128,7 @@ messageStatus=false;
 
 
 
-    this.dataService.postForEmployeeList().subscribe(
+    this.dataService.postForCCToList().subscribe(
       (result: any) => {
         (result.forEach(element => {
           this.tempCCToList.push(element);

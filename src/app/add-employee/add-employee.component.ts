@@ -4,7 +4,9 @@ import { employee } from '../data/employee';
 import { NgForm } from '@angular/forms';
 import { DataService } from '../data/data.service';
 import { Router } from '@angular/router';
+import { ValidatorService } from '../data/validator.service';
 
+const moment = require('moment-business-days');
 @Component({
   selector: 'app-add-employee',
   templateUrl: './add-employee.component.html',
@@ -13,7 +15,7 @@ import { Router } from '@angular/router';
 
 export class AddEmployeeComponent implements OnInit {
 
-  employeeInstance:employee={
+    employeeInstance:employee={
     name:null,
     gender:null,
     email:null,
@@ -44,9 +46,20 @@ postErrorMessage="Unable to connect to server";
 postMessage='';
 messageStatus=false;
 today = new Date();
-test = false;
+formErrormessage='';
+emailErrormessage='';
 
-constructor(private dataService:DataService,private lay:LayoutService,private router:Router) {
+emailError:boolean=false;
+emailErrorMessage='';
+mobileError:boolean=false;
+mobileErrorMessage='';
+dobError:boolean=false;
+dobErrorMessage='';
+dojError:boolean=false;
+dojErrorMessage='';
+isFormValid:boolean=true;
+
+constructor(private dataService:DataService,private lay:LayoutService,private router:Router,private val:ValidatorService) {
    
    }
 
@@ -69,7 +82,12 @@ PostMessage(message:string)
   this.postMessage=message;
 }
   onSubmit(employeeForm:NgForm)
-  {  if(employeeForm.valid)  
+  {  
+    this.val.validateForm(this.employeeInstance);
+    this.FormErrors();
+
+  
+    if(employeeForm.valid && this.val.isFormValid)  
     { this.employeeInstance.isManager= this.isManagerChecked ? "0":"1";
  
       this.employeeInstance.isAdmin=this.isAdminChecked ? "0":"1";
@@ -118,5 +136,17 @@ onCheckAdmin(e) {
     this.managersList = this.tempManagersList;
 
   }
+  FormErrors()
+  {
+    this.emailErrorMessage=this.val.emailErrorMessage;
+    this.emailError=this.val.emailError;
+    this.mobileError=this.val.mobileError;
+    this.mobileErrorMessage=this.val.mobileErrorMessage;
+    this.dobError=this.val.dobError;
+    this.dobErrorMessage=this.val.dobErrorMessage;
+    this.dojError=this.val.dojError;
+    this.dojErrorMessage=this.val.dojErrorMessage;
+  }
+
 
 }

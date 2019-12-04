@@ -53,6 +53,11 @@
                     * Email is required
                 </div>
             </div>
+            <div class="input-group">
+                <div [hidden]="!emailError" class="required">
+                    {{emailErrorMessage}}
+                </div>
+            </div>
         </div>
     </div>
     <div class="form-group input-group">
@@ -66,6 +71,11 @@
         <div class="input-group">
             <div [hidden]="!employeeForm.submitted||mobileField.valid" class="required">
                 * Mobile number is required
+            </div>
+        </div>
+        <div class="input-group">
+            <div [hidden]="!mobileError" class="required">
+                {{mobileErrorMessage}}
             </div>
         </div>
     </div>
@@ -87,6 +97,11 @@
                 * DOB is required
             </div>
         </div>
+        <div class="input-group">
+            <div [hidden]="!dobError" class="required">
+                {{dobErrorMessage}}
+            </div>
+        </div>
     </div>
     <div class="form-group input-group">
         <div class="input-group-prepend">
@@ -98,6 +113,11 @@
         <div class="input-group">
             <div [hidden]="!employeeForm.submitted||dojField.valid" class="required">
                 * DOJ is required
+            </div>
+        </div>
+        <div class="input-group">
+            <div [hidden]="!dojError" class="required">
+                {{dojErrorMessage}}
             </div>
         </div>
     </div>

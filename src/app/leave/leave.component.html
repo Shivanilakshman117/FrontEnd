@@ -183,7 +183,7 @@
                 </span>
                 </div>
                 <select class="form-control" name="CCTo" [(ngModel)]="leaveInstance.CCTo" #CCToField="ngModel" [class.field-error]="leaveForm.submitted && CCToField.invalid">
-             <option *ngFor="let c of ccToList" [ngValue]="c">{{c.Name}}</option>
+             <option *ngFor="let c of ccToList" [ngValue]="c.Name">{{c.Name}}</option>
              </select>
             </div>
         </div>

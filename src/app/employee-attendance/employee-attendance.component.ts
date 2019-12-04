@@ -39,7 +39,7 @@ export class EmployeeAttendanceComponent implements OnInit {
 
     this.attendance = this.tempAttendance;
    this.empty=this.attendance.length==0 ? true:false;
-console.log(this.attendance.length==0,this.empty);
+
   }
 
   track()

@@ -1,27 +1,5 @@
 <form class="form-inline d-flex p-3 filter-row justify-content-around">
     <div class="form-group mb-2">
-        <label>From</label>
-        <div class="form-group input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text">
-               <mat-icon>date_range</mat-icon>
-            </span>
-            </div>
-            <input class="form-control" type="date" name="fromDate" [(ngModel)]="fromDate">
-        </div>
-    </div>
-    <div class="form-group mb-2">
-        <label>To</label>
-        <div class="form-group input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text">
-               <mat-icon>date_range</mat-icon>
-            </span>
-            </div>
-            <input class="form-control" type="date" name="toDate" [(ngModel)]="toDate">
-        </div>
-    </div>
-    <div class="form-group mb-2">
         <label for="Leave Type">Filter by</label>
         <div class="form-group input-group" required>
             <div class="input-group-prepend">
@@ -36,12 +14,11 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-info mb-2">Track</button>
 </form>
 
-<p class="alert alert-info text-center center-display" *ngIf="isListEmpty">Attendance has not yet been updated! Please try later!</p>
+<p class="alert alert-info text-center center-display" *ngIf="!empty">Attendance has not yet been updated! Please try later!</p>
 
-<table class="table" [hidden]="isListEmpty">
+<table class="table" [hidden]="!empty">
     <thead>
         <tr>
 

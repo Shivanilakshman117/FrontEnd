@@ -1,4 +1,4 @@
-<table class="table table-bordered" [hidden]="isListEmpty">
+<table class="table table-bordered" [hidden]="!isListEmpty">
     <thead>
         <tr>
             <th scope="col">ID</th>
@@ -28,4 +28,4 @@
         </tr>
     </tbody>
 </table>
-<p class="alert alert-info center-display text-center" *ngIf="isListEmpty">You do not have any leave applications to approve</p>
+<p class="alert alert-info center-display text-center" *ngIf="!isListEmpty">You do not have any leave applications to approve</p>

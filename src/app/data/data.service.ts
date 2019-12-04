@@ -25,96 +25,102 @@ export class DataService {
     
     let body = `username=${loginInstance.username}&password=${loginInstance.password}&grant_type=${loginInstance.grant_type}`;
 
-    return this.http.post('https://localhost:44310/token',body)
+    return this.http.post('https://localhost:8080/token',body)
     
     //return of(loginInstance);
   }
 
   getUserDetails()
   {
-    return this.http.get('https://localhost:44310/api/login/authenticate');
+    return this.http.get('https://localhost:8080/api/login/authenticate');
   }
 
   postEmployeeForm(employeeInstance:employee): Observable<any>
   {
     
-    return this.http.post('https://localhost:44310/api/AddEmployee/newemployee',employeeInstance)
+    return this.http.post('https://localhost:8080/api/AddEmployee/newemployee',employeeInstance)
     
     //return of(loginInstance);
   }
 
   postForEmployeeList():Observable<any>
   {
-    return this.http.post('https://localhost:44310/api/Values/GetAllEmployees',null);
+    return this.http.post('https://localhost:8080/api/Values/GetAllEmployees',null);
   }
+  postForCCToList():Observable<any>
+  {
+    return this.http.post('https://localhost:8080/api/Values/GetCCToList',null);
+  }
+
 
   postForReportingAuthoritiesList():Observable<any>
   {
-    return this.http.post('https://localhost:44310/api/Values/GetReportingAuthorities',null);
+    return this.http.post('https://localhost:8080/api/Values/GetReportingAuthorities',null);
   }
 
   getHolidaysList():Observable<any>
   {
-    return this.http.post('https://localhost:44310/api/Values/GetHolidaysList',null);
+    return this.http.post('https://localhost:8080/api/Values/GetHolidaysList',null);
   }
   postForManagersList():Observable<any>
   {
-    return this.http.post('https://localhost:44310/api/Values/GetManagersList',null)
+    return this.http.post('https://localhost:8080/api/Values/GetManagersList',null)
   }
   postForVerifyEmployee(verifyEmployeeInstance:verifyEmployee, id:string):Observable<any>
   {  
     let body = `password=${verifyEmployeeInstance.password}&securityQuestion=
     ${verifyEmployeeInstance.securityQuestion}&answer=${verifyEmployeeInstance.answer}`;
     let t= id.toString();
-    let url='https://localhost:44310/api/AddEmployee/newemployee/VerifyAccount/'.concat(t);
+    let url='https://localhost:8080/api/AddEmployee/newemployee/VerifyAccount/'.concat(t);
     return this.http.post(url,verifyEmployeeInstance);
     
     
   }
 
   postForForgotPassword(forgotPasswordInstance:forgotPassword):Observable<any>
-  {  let url="https://localhost:44310/api/login/forgotpassword";
+  {  let url="https://localhost:8080/api/login/forgotpassword";
     return this.http.post(url, forgotPasswordInstance);
     
     
   }
   getCurrentLeaves():Observable<any>
   {
-    return this.http.post('https://localhost:44310/api/Values/leavebalance',null);
+    return this.http.post('https://localhost:8080/api/Values/leavebalance',null);
   }
 
   postLeaveApplication(application:leave)
   {
-    return this.http.post('https://localhost:44310/api/Leave/ApplyLeave',application);
+    console.log(application);
+    return this.http.post('https://localhost:8080/api/Leave/ApplyLeave',application);
   }
 
   getAttendance()
   {
-    return this.http.post('https://localhost:44310/api/Values/GetAttendance',null);
+    return this.http.post('https://localhost:8080/api/Values/GetAttendance',null);
   }
   getApplications()
   {
-    return this.http.post('https://localhost:44310/api/Values/ApproveLeave',null);
+    return this.http.post('https://localhost:8080/api/Values/ApproveLeave',null);
   }
   postLeaveStatus(approveleaveInstance:approveLeaves)
   {
 
-    return this.http.post('https://localhost:44310/api/values/changeStatus',approveleaveInstance)
+    return this.http.post('https://localhost:8080/api/values/changeStatus',approveleaveInstance)
     
   }
   getSecurityQuestions():Observable<any>
   {
-    return this.http.post('https://localhost:44310/api/Values/securityQuestion',null);
+    return this.http.post('https://localhost:8080/api/Values/securityQuestion',null);
   }
   getMyLeaves():Observable<any>
   {
-    return this.http.post('https://localhost:44310/api/Values/TrackLeave',null);
+    return this.http.post('https://localhost:8080/api/Values/TrackLeave',null);
   }
 
   getMySecurityQuestion(id:string)
   {
     let t= id.toString();
-    return this.http.get('https://localhost:44310/api/Values/getMySecurityQuestion/'.concat(t));
+    return this.http.get('https://localhost:8080/api/Values/getMySecurityQuestion/'.concat(t));
   }
 
 }
